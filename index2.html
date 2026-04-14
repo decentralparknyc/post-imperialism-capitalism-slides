@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Capitalism &amp; Post-Imperialism</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  :root {
+    --g8:#166534; --g7:#15803D; --g6:#16A34A; --g5:#22C55E;
+    --g2:#BBF7D0; --g1:#DCFCE7; --g0:#F0FDF4; --e1:#D1FAE5;
+    --d8:#1F2937; --d6:#4B5563; --d5:#6B7280; --d1:#F3F4F6;
+    --wh:#FFFFFF; --bk:#171717;
+    --shadow-border: rgba(0,0,0,0.08) 0px 0px 0px 1px;
+    --shadow-card: rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.04) 0px 2px 2px, rgba(0,0,0,0.04) 0px 8px 8px -8px;
+    --shadow-elevated: rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.06) 0px 4px 12px, rgba(0,0,0,0.04) 0px 16px 24px -8px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;background:var(--wh);color:var(--bk);overflow:hidden;height:100vh;width:100vw;font-feature-settings:"liga" 1}
+
+  .slides{width:100vw;height:100vh}
+  .sl{display:none;flex-direction:column;width:100%;height:100%;padding:36px 6vw 24px;overflow-y:auto}
+  .sl.on{display:flex}
+
+  .sh{margin-bottom:24px;flex-shrink:0}
+  .sh .lb{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;color:var(--g6);margin-bottom:8px}
+  .sh h1{font-size:min(40px,5.5vw);font-weight:600;color:var(--bk);line-height:1.05;letter-spacing:-1.6px}
+  .sh h2{font-size:min(16px,2.2vw);font-weight:400;color:var(--d6);margin-top:8px;letter-spacing:-0.2px}
+
+  .sb{flex:1;overflow-y:auto;padding-bottom:64px}
+  .sb::-webkit-scrollbar{width:4px}
+  .sb::-webkit-scrollbar-track{background:transparent}
+  .sb::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:2px}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+
+  .c{background:var(--wh);border:none;border-radius:8px;padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow-card)}
+  .c h3{font-size:14px;font-weight:600;color:var(--bk);margin-bottom:6px;letter-spacing:-0.28px}
+  .c p,.c li{font-size:13px;color:var(--d6);line-height:1.65}
+  .c ul{padding-left:16px}
+  .c li{margin-bottom:3px}
+
+  blockquote{border-left:2px solid var(--g6);padding:10px 16px;margin:8px 0;background:rgba(22,101,52,0.04);border-radius:0 6px 6px 0;font-style:italic;font-size:13px;color:var(--d8);line-height:1.55}
+  blockquote cite{display:block;font-style:normal;font-weight:500;color:var(--g7);margin-top:5px;font-size:11px}
+
+  .bq{text-align:center;font-size:min(24px,3.5vw);font-weight:600;color:var(--bk);margin:20px 0;padding:24px;background:var(--wh);border-radius:8px;box-shadow:var(--shadow-elevated);letter-spacing:-0.96px}
+
+  .tag{display:inline-block;padding:2px 10px;border-radius:9999px;font-size:11px;font-weight:500;margin-right:4px;margin-bottom:3px}
+  .tg{background:rgba(22,101,52,0.08);color:var(--g8)} .ty{background:rgba(0,0,0,0.04);color:var(--d8)}
+
+  .rl{font-size:11px;color:var(--g6);text-decoration:none;word-break:break-all;font-weight:500}
+  .rl:hover{text-decoration:underline}
+  .rf{margin-top:8px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06);font-size:11px;color:var(--d5)}
+
+  .hb{background:var(--bk);color:var(--wh);border-radius:8px;padding:20px 24px;margin:10px 0;box-shadow:var(--shadow-border)}
+  .hb h3{color:var(--g5);font-size:14px;margin-bottom:6px;font-weight:600;letter-spacing:-0.28px}
+  .hb p,.hb li{color:rgba(255,255,255,.8);font-size:13px;line-height:1.6}
+  .hb ul{padding-left:16px}
+
+  .fs{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .fs .sn{width:24px;height:24px;background:var(--bk);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:2px}
+  .fs .st{font-size:13px;color:var(--d8);line-height:1.55}
+
+  .mermaid{background:var(--wh);border-radius:8px;padding:16px;border:none;box-shadow:var(--shadow-card);margin:10px 0;text-align:center;overflow-x:auto}
+
+  table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
+  th{background:rgba(0,0,0,0.03);color:var(--bk);font-weight:600;text-align:left;padding:8px 10px;border-bottom:1px solid rgba(0,0,0,0.08)}
+  td{padding:7px 10px;border-bottom:1px solid rgba(0,0,0,0.04);color:var(--d6)}
+
+  .nb{position:fixed;bottom:0;left:0;right:0;height:52px;background:var(--bk);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:100;box-shadow:rgba(0,0,0,0.1) 0px -1px 0px}
+  .nb .br{color:var(--wh);font-size:13px;font-weight:600;letter-spacing:-0.2px;display:flex;align-items:center;gap:8px}
+  .nb .ct{display:flex;align-items:center;gap:10px}
+  .nb button{background:rgba(255,255,255,0.1);color:var(--wh);border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .15s}
+  .nb button:hover{background:rgba(255,255,255,0.2)}
+  .nb button:disabled{opacity:.3;cursor:default}
+  .nb .cn{color:rgba(255,255,255,.45);font-size:12px;font-weight:500;min-width:55px;text-align:center;font-feature-settings:"tnum" 1}
+
+  .cc{background:var(--wh);border:none;border-radius:8px;padding:16px 18px;text-align:center;box-shadow:var(--shadow-card);transition:box-shadow .2s}
+  .cc:hover{box-shadow:var(--shadow-elevated)}
+  .cc .ic{font-size:28px;margin-bottom:8px}
+  .cc h4{font-size:13px;font-weight:600;color:var(--bk);margin-bottom:6px;letter-spacing:-0.13px}
+  .cc p{font-size:12px;color:var(--d6);line-height:1.5}
+
+  .sr{display:flex;gap:12px;flex-wrap:wrap}
+  .sp{background:var(--wh);border:none;border-radius:6px;padding:12px 16px;flex:1;min-width:120px;text-align:center;box-shadow:var(--shadow-border)}
+  .sp .n{font-size:22px;font-weight:600;color:var(--bk);letter-spacing:-0.88px}
+  .sp .l{font-size:10px;color:var(--d5);margin-top:3px;font-weight:500}
+
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:500;margin:2px}
+
+  .il{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
+  .il h1{font-size:min(48px,7vw);font-weight:600;color:var(--bk);margin-bottom:16px;letter-spacing:-2.4px}
+  .il p{font-size:min(18px,2.5vw);color:var(--d6);max-width:560px;line-height:1.7;font-weight:400}
+
+  .quad{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr 1fr auto;gap:0;border:none;border-radius:8px;overflow:hidden;font-size:12px;box-shadow:var(--shadow-card)}
+  .quad .ax{grid-column:1/3;text-align:center;padding:5px;font-size:10px;font-weight:500;color:var(--d5);text-transform:uppercase;letter-spacing:1px}
+  .quad .q{padding:12px}
+  .quad .q h4{font-weight:600;color:var(--bk);margin-bottom:4px;font-size:12px;letter-spacing:-0.12px}
+  .quad .q p{color:var(--d6);line-height:1.4;font-size:11px}
+  .quad .q .note{color:var(--g7);font-size:10px;margin-top:4px;font-weight:500}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="slides">
+
+<!-- ======== 1: WHAT IS CAPITALISM ======== -->
+<div class="sl on" id="s1">
+  <div class="sh"><div class="lb">Part I &mdash; Post-Capitalism</div><h1>What Is Capitalism?</h1><h2>The M-C-M' circuit, the goods matrix, and the question that follows</h2></div>
+  <div class="sb"><div class="g2" style="align-items:start">
+    <div>
+      <div class="c">
+        <h3>The M-C-M' Circuit</h3>
+        <p>Capitalism is not "free markets." Markets existed for millennia. Capitalism is a specific circuit:</p>
+        <div style="text-align:center;margin:10px 0">
+          <span style="font-size:12px;color:var(--d6)">Simple exchange:</span><br>
+          <span style="font-size:20px;font-weight:800;color:var(--d5)">C &rarr; M &rarr; C</span><br>
+          <span style="font-size:11px;color:var(--d5)">Sell linen, buy a coat. Finite. Satisfies a need.</span>
+        </div>
+        <div style="text-align:center;margin:10px 0">
+          <span style="font-size:12px;color:var(--g7)">Capital:</span><br>
+          <span style="font-size:26px;font-weight:800;color:var(--g8)">M &rarr; C &rarr; M'</span><br>
+          <span style="font-size:11px;color:var(--g7)">Invest money, produce commodities, extract more money. <strong>No endpoint.</strong></span>
+        </div>
+        <p>M' = M + &Delta;M (surplus value). The result is qualitatively identical to the start &mdash; just more money. So the process repeats. <strong>Forever.</strong> Capital is not a thing; it is value in motion that must perpetually expand.</p>
+        <blockquote>"The circulation of capital has therefore no limits."<cite>&mdash; Karl Marx, <em>Capital</em> Vol. 1, Ch. 4</cite></blockquote>
+        <blockquote>"Use-values must therefore never be looked upon as the real aim of the capitalist... The restless never-ending process of profit-making alone is what he aims at."<cite>&mdash; Marx, <em>Capital</em> Vol. 1</cite></blockquote>
+        <p style="margin-top:6px;font-size:12px">This limitless drive &mdash; <strong>expand or die</strong> &mdash; is why capital inevitably bursts national boundaries and becomes imperialism.</p>
+      </div>
+    </div>
+    <div>
+      <div class="c"><h3>The Four Types of Goods</h3><p style="margin-bottom:6px">Capitalism's M-C-M' circuit works best for one quadrant:</p>
+        <div class="quad">
+          <div class="ax">&uarr; Non-Rivalrous</div>
+          <div class="q" style="background:#F0FDF4;border-right:2px solid var(--g2);border-bottom:2px solid var(--g2)"><h4>Public Goods</h4><p>National defense, street lighting, open-source software, clean air, knowledge</p><p class="note">Markets underprovide (free rider problem)</p></div>
+          <div class="q" style="background:#D1FAE5;border-bottom:2px solid var(--g2)"><h4>Club Goods</h4><p>Netflix, toll roads, gyms, cinemas, encrypted WiFi</p><p class="note">Require artificial scarcity (DRM, paywalls)</p></div>
+          <div class="q" style="background:#DCFCE7;border-right:2px solid var(--g2)"><h4>Common-Pool Resources</h4><p>Fisheries, forests, groundwater, the atmosphere</p><p class="note">Tragedy of the Commons (Hardin 1968)</p></div>
+          <div class="q" style="background:#BBF7D0"><h4>Private Goods &#9733;</h4><p>Food, cars, housing, smartphones, oil</p><p class="note"><strong>Capitalism's sweet spot</strong></p></div>
+          <div class="ax" style="display:flex;justify-content:space-between;padding:3px 10px"><span>&larr; Public</span><span>&darr; Rivalrous</span><span>Private &rarr;</span></div>
+        </div>
+      </div>
+      <div class="c"><h3>Capitalism's Blind Spots</h3>
+        <ul><li><strong>Public goods</strong> &mdash; no profit incentive, so markets underprovide</li><li><strong>Commons</strong> &mdash; no excludability, so markets overexploit</li><li><strong>Club goods</strong> &mdash; require artificial scarcity (DRM, IP law)</li></ul>
+        <p style="margin-top:5px">M-C-M' only works where goods are <strong>rivalrous + excludable</strong>.</p>
+        <div class="rf"><a class="rl" href="https://plato.stanford.edu/entries/public-goods/" target="_blank">Stanford Encyclopedia: Public Goods</a> &bull; Samuelson (1954), Ostrom (Nobel 2009)</div>
+      </div>
+      <div class="bq" style="font-size:22px">Okay, so what is post-capitalism?</div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 2: POST-CAPITALISM DEFINED ======== -->
+<div class="sl" id="s2">
+  <div class="sh"><div class="lb">Part I &mdash; Post-Capitalism</div><h1>What Is Post-Capitalism?</h1><h2>A framework for collective ownership beyond the state</h2></div>
+  <div class="sb">
+    <div class="c" style="margin-bottom:10px"><h3>Definition</h3><p>In <em>Post-Capitalist Society</em> (1993), Peter Drucker argued that knowledge has replaced capital, land, and labor as the decisive factor of production. In a post-capitalist society, the basic economic resource is no longer capital or natural resources or labor &mdash; it is knowledge, and value is created by productivity and innovation applied by knowledge workers who own their own means of production.</p></div>
+    <div class="g3" style="margin-bottom:12px">
+      <div class="c" style="border-color:var(--g6);border-width:2px"><h3>&#x2714; Collectively Owned</h3><p>Without any state means &mdash; not state socialism, not charity, not custodial. A third mode of ownership distinct from both private property and state property.</p></div>
+      <div class="c" style="border-color:var(--g6);border-width:2px"><h3>&#x2714; Better for Everyone</h3><p>Better than the capitalist alternative for both consumers and workers. Lower prices, democratic control, intrinsic motivation over wage exploitation.</p></div>
+      <div class="c" style="border-color:var(--g6);border-width:2px"><h3>&#x2714; Self-Sustaining</h3><p>Structurally incentivized. Survives without charity or custody. Revenue comes from real value creation, not donations or state subsidies.</p></div>
+    </div>
+    <blockquote>"To change our economy we need to change our economic language, for the nature of our economy is bound by the expressivity of the language that can conceive it."<cite>&mdash; Bryan, Lopez &amp; Virtanen, <em><a href="https://postcapitalist.agency/" target="_blank" class="rl">Protocols for Postcapitalist Expression</a></em></cite></blockquote>
+    <blockquote>"Today, the main contradiction in modern capitalism is between the possibility of free, abundant socially produced goods, and a system of monopolies, banks and governments struggling to maintain control over power and information."<cite>&mdash; Paul Mason, <em><a href="https://en.wikipedia.org/wiki/PostCapitalism" target="_blank" class="rl">PostCapitalism</a></em> (2015)</cite></blockquote>
+    <div class="g2">
+      <blockquote>"The real and controlling resource and the absolutely decisive 'factor of production' is neither capital, nor land, nor labor. It is knowledge."<cite>&mdash; Peter Drucker, <em>Post-Capitalist Society</em> (1993)</cite></blockquote>
+      <blockquote>"The economic aspirations of a previous generation are no longer available to the majority of the population."<cite>&mdash; Akseli Virtanen, <a href="https://medium.com/econaut/towards-post-capitalism-7679d2831408" target="_blank" class="rl">Towards Post-Capitalism</a></cite></blockquote>
+    </div>
+    <div class="rf"><a class="rl" href="https://en.wikipedia.org/wiki/Post-capitalism" target="_blank">Wikipedia: Post-capitalism</a> &bull; <a class="rl" href="https://en.wikipedia.org/wiki/Commons-based_peer_production" target="_blank">Commons-based peer production</a> &bull; <a class="rl" href="https://antipodeonline.org/2020/02/19/interview-with-michel-bauwens/" target="_blank">Bauwens (P2P Foundation)</a> &bull; <a class="rl" href="https://www.versobooks.com/products/148-inventing-the-future" target="_blank">Srnicek &amp; Williams</a></div>
+  </div>
+</div>
+
+<!-- ======== 3: WIKIPEDIA ======== -->
+<div class="sl" id="s3">
+  <div class="sh"><div class="lb">Part I &mdash; Post-Capitalism</div><h1>Example: Wikipedia</h1><h2>The canonical post-capitalist organization</h2></div>
+  <div class="sb"><div class="g2" style="align-items:start">
+    <div>
+      <div class="c"><h3>How Wikipedia Satisfies the Criteria</h3>
+        <table><tr><th>Criterion</th><th>Wikipedia</th></tr>
+          <tr><td><strong>Collectively owned</strong></td><td>No shareholders, no CEO. Governed by its community of editors. Wikimedia Foundation is a nonprofit steward, not an owner.</td></tr>
+          <tr><td><strong>Better for consumers</strong></td><td>Free, comprehensive, available in 300+ languages. No ads, no paywall. Replaced Encyclopaedia Britannica ($1,400/set).</td></tr>
+          <tr><td><strong>Better for workers</strong></td><td>Contributors are intrinsically motivated. No wage labor exploitation. Peer governance &mdash; bottom-up participative decision-making.</td></tr>
+          <tr><td><strong>No state involvement</strong></td><td>Not a government entity. Operates globally, funded by small donations from millions of users.</td></tr>
+        </table>
+      </div>
+      <blockquote>"Linux, Firefox, Wikipedia and open-source hardware are significant commodities freely available in the digital economy."<cite>&mdash; Paul Mason, <em>PostCapitalism</em></cite></blockquote>
+    </div>
+    <div>
+      <div class="c"><h3>What Makes It Work</h3>
+        <p>Yochai Benkler (Harvard Law) identified three requirements for successful <strong>commons-based peer production</strong>:</p>
+        <ul><li><strong>Modularity</strong> &mdash; tasks divisible into independent components</li><li><strong>Granularity</strong> &mdash; variable sizes allowing different commitment levels</li><li><strong>Low-cost integration</strong> &mdash; mechanisms for quality control</li></ul>
+        <p style="margin-top:8px">Wikipedia demonstrates that a <strong>non-market, non-state</strong> mode of coordination can outperform both firms and markets for certain types of production &mdash; especially knowledge goods.</p>
+      </div>
+      <div class="c" style="background:var(--g0)"><h3>The Caveat</h3>
+        <p>Wikipedia is still "a prototype" (Bauwens) that cannot fully separate itself from capitalism &mdash; it relies on donations and infrastructure hosted within capitalist systems. But it proves the <strong>organizational model works</strong> at scale.</p>
+      </div>
+      <div class="rf"><a class="rl" href="https://en.wikipedia.org/wiki/Commons-based_peer_production" target="_blank">Commons-based peer production</a> &bull; <a class="rl" href="https://wiki.p2pfoundation.net/Michel_Bauwens" target="_blank">P2P Foundation</a></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 4: MUTUAL VEND ======== -->
+<div class="sl" id="s4">
+  <div class="sh"><div class="lb">Part I &mdash; Post-Capitalism</div><h1>Example: Mutual Vend</h1><h2>A 3D-printable, community-owned vending machine network &mdash; <a href="https://mutual-vend.com" target="_blank" class="rl" style="font-size:14px">mutual-vend.com</a></h2></div>
+  <div class="sb"><div class="g2" style="align-items:start">
+    <div>
+      <div class="c"><h3>How It Works</h3>
+        <div class="fs"><div class="sn">1</div><div class="st"><strong>Stock the Machine</strong> &mdash; Community members stake stablecoin collateral (USDC/USDT), then physically stock products. Random verifiers vote to confirm inventory &mdash; honest stocking unlocks rewards; dishonest stocking gets collateral slashed.</div></div>
+        <div class="fs"><div class="sn">2</div><div class="st"><strong>Pay with Crypto</strong> &mdash; Customers pay via stablecoins. No banks, no payment processors, low fees.</div></div>
+        <div class="fs"><div class="sn">3</div><div class="st"><strong>Earn Revenue Share</strong> &mdash; Every purchase automatically grants the customer a temporary revenue-sharing token (~2 week window). You buy a snack, you earn from the next person's purchase.</div></div>
+      </div>
+      <div class="c"><h3>Three Roles, No Boss</h3>
+        <table><tr><th>Role</th><th>What they do</th><th>How they earn</th></tr>
+          <tr><td><strong>Customers</strong></td><td>Buy items</td><td>Revenue-share tokens on every purchase</td></tr>
+          <tr><td><strong>Stockers</strong></td><td>Stake collateral, supply inventory</td><td>Stocking rewards + collateral return</td></tr>
+          <tr><td><strong>Verifiers</strong></td><td>Randomly selected token holders vote on inventory accuracy</td><td>Verification fees</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="hb"><h3>How It Fulfills the Post-Capitalist Criteria</h3>
+        <table style="color:#fff"><tr><th style="background:rgba(255,255,255,.15);color:#fff">Criterion</th><th style="background:rgba(255,255,255,.15);color:#fff">Traditional Vending</th><th style="background:rgba(255,255,255,.15);color:#fff">Mutual Vend</th></tr>
+          <tr><td style="color:#fff;border-color:rgba(255,255,255,.15)"><strong>Ownership</strong></td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Single operator keeps all profit</td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Open-source, community-governed</td></tr>
+          <tr><td style="color:#fff;border-color:rgba(255,255,255,.15)"><strong>For consumers</strong></td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Pay 150-300% markup</td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Every purchase earns revenue share</td></tr>
+          <tr><td style="color:#fff;border-color:rgba(255,255,255,.15)"><strong>For workers</strong></td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Restockers earn wages</td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Stockers earn rewards + keep collateral</td></tr>
+          <tr><td style="color:#fff;border-color:rgba(255,255,255,.15)"><strong>State role</strong></td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Business licenses, regulations</td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Smart contracts, no state needed</td></tr>
+          <tr><td style="color:#fff;border-color:rgba(255,255,255,.15)"><strong>Machine cost</strong></td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">$3,000-$10,000+</td><td style="color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.15)">Cost of 3D printing (open-source)</td></tr>
+        </table>
+      </div>
+      <div class="c"><h3>The Economics</h3>
+        <p>A traditional vending machine generates ~20-30% net margin for a single owner. Mutual Vend distributes that margin across all participants:</p>
+        <ul><li><strong>Customers</strong> get revenue-share tokens (~2 week payout windows)</li><li><strong>Stockers</strong> earn rewards for labor</li><li><strong>Verifiers</strong> earn fees for honest attestation</li><li><strong>Governance token</strong> (pegged 1:1 to USD) coordinates the network</li></ul>
+        <p style="margin-top:5px;font-size:12px">The same model extends to <strong>mutual laundromats</strong>, <strong>mutual cafes</strong>, or any retail point. A capitalist laundromat extracts ~30-40% profit &mdash; a mutual one returns that margin to users as lower prices or shared revenue.</p>
+      </div>
+      <div class="rf"><a class="rl" href="https://mutual-vend.com" target="_blank">mutual-vend.com</a> &bull; <a class="rl" href="https://bread.coop" target="_blank">Bread Cooperative</a> &bull; Demonstrated at NYC PIT Pop Up, The Oculus, Nov 2025</div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 5: POCAS ======== -->
+<div class="sl" id="s5">
+  <div class="sh"><div class="lb">Part I &mdash; Post-Capitalism</div><h1>Speculative Post-Capitalism: POCAS</h1><h2>What if you reimagined the convenience store as a mutualist network? &mdash; <a href="https://pocas.store" target="_blank" class="rl" style="font-size:14px">pocas.store</a></h2></div>
+  <div class="sb">
+    <div class="g2" style="margin-bottom:10px">
+      <div class="c"><h3>POCA &mdash; Organizacion Cooperativa de Autoservicio</h3><p>"Economic science-fiction" imagining a network of collectively-owned convenience stores in Mexico City. Appropriates the aesthetics of OXXO/7-Eleven but replaces the profit motive with mutualist cooperation.</p></div>
+    </div>
+    <div class="g3">
+      <div class="c"><h3>Plural Exchange</h3>
+        <ul><li><strong>Plural Markets</strong> &mdash; mutual credit ("poco credito"), vouchers, time-banking, or conventional money</li><li><strong>Free-Stores</strong> &mdash; gift economy sections where goods are simply given</li><li><strong>Coop Shops</strong> &mdash; inter-store commerce between pocas locations</li><li><strong>Cosa-teca</strong> &mdash; shared tool libraries (borrow, don't buy)</li><li><strong>Pocos Pesos</strong> &mdash; internal crypto pegged 1:1 to the Mexican peso</li><li><strong>FoCos</strong> &mdash; communal funds for grants, loans, and insurance</li></ul>
+      </div>
+      <div class="c"><h3>Spin-off Cooperatives (MUCHAs)</h3>
+        <ul><li><strong>Saltaharinas</strong> &mdash; insect protein production</li><li><strong>Dulce Dolor</strong> &mdash; artisanal candy cooperative</li><li><strong>La Farmacia Trans+Feminista</strong> &mdash; autonomous pharmaceutical documentation</li><li><strong>Maquinas de Hogar</strong> &mdash; open-hardware appliance workshops</li><li><strong>Vegetales con Patas</strong> &mdash; vegan meat alternatives lab</li></ul>
+      </div>
+      <div class="c"><h3>Infrastructure &amp; Governance</h3>
+        <ul><li>Mesh networks independent of ISPs</li><li>Communal computers from recycled hardware</li><li>Cargo bikes for logistics</li><li>Democratic assemblies with subsidiarity</li><li>"Balanced jobs" mixing desirable and monotonous work</li><li>Compensation based on effort, not market value</li><li>Restorative justice processes</li></ul>
+      </div>
+    </div>
+    <div class="c" style="background:var(--g0);margin-top:6px"><h3>Intellectual Lineage</h3><p>Draws on indigenous governance (tequio, Iroquois confederalism), anarcho-syndicalism, platform cooperativism, solidarity economics, feminist care work, and distributed ledger technologies. Asks: <strong>could distributed computing make historical mutualist practices viable at modern urban scale?</strong></p></div>
+  </div>
+</div>
+
+<!-- ======== 6: INTERLUDE ======== -->
+<div class="sl" id="s6">
+  <div class="il">
+    <h1>Part II: Post-Imperialism</h1>
+    <p>If capitalism is M-C-M' &mdash; value that must endlessly expand &mdash; then imperialism is what happens when it runs out of room.</p>
+    <div style="margin-top:28px;text-align:left;max-width:500px">
+      <div class="c" style="background:var(--g0)"><h3>Questions for the audience</h3>
+        <ul><li>Can you think of a post-capitalist mechanism?</li><li>What services do you think require no state involvement?</li><li>What services do you rely on that could be collectively owned?</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 6: WHAT IS IMPERIALISM ======== -->
+<div class="sl" id="s7">
+  <div class="sh"><div class="lb">Part II &mdash; Post-Imperialism</div><h1>What Is Imperialism?</h1><h2>A system of dispossession in the service of capital</h2></div>
+  <div class="sb">
+    <div class="c" style="margin-bottom:10px"><h3>Definition</h3><p>The term "imperialism" entered English around 1870, shortly after the laying of the transatlantic telegraph cable. Imperialism is the extension of a nation's power through territorial acquisition, economic domination, and military force. It is the political expression of capitalism's need to perpetually expand &mdash; the M-C-M' circuit bursting national boundaries in search of new markets, cheap labor, and raw materials. Where colonialism extracts resources from specific territories, imperialism is the <strong>system</strong> that coordinates that extraction globally.</p></div>
+    <div class="g2">
+    <div>
+      <blockquote>Imperialism is "no less than a systemic dispossessive relation to the living and the life-making capacities of the colonized that operates in the debased service of the reproduction of capital in all its forms."<cite>&mdash; Neferti Tadiar, <em>Remaindered Life</em> (2022)</cite></blockquote>
+      <blockquote>"It was the cable and telegraph, backed, of course, by sea power, that turned colonialism into imperialism: a system in which the center of an empire could dictate rather than merely respond to the margin."<cite>&mdash; James Carey, <em>Communication as Culture</em> (2009)</cite></blockquote>
+      <blockquote>"Military action is the other necessary and unavoidable face of dollar imperialism."<cite>&mdash; Maurizio Lazzarato, <em><a href="https://www.versobooks.com/products/3237-war-and-money" target="_blank" class="rl">War and Money</a></em></cite></blockquote>
+      <blockquote>"Imperialism is the right of life and death over the population."<cite>&mdash; Lazzarato</cite></blockquote>
+      <blockquote>"From the standpoint of capitalism... the violent appropriation of the colonial countries' most important means of production is a question of life or death for it."<cite>&mdash; Rosa Luxemburg, <em><a href="https://www.marxists.org/archive/luxemburg/1913/accumulation-capital/ch31.htm" target="_blank" class="rl">The Accumulation of Capital</a></em> (1913)</cite></blockquote>
+    </div>
+    <div>
+      <div class="c"><h3>Lenin's Four Features (1916)</h3>
+        <ul><li><span class="tag tg">Financialization</span> Merging of bank and industrial capital</li><li><span class="tag tg">Colonization</span> Territorial division of the world</li><li><span class="tag tg">Monopoly</span> Concentration into monopolies</li><li><span class="tag tg">War</span> Armed conflict for redivision</li></ul>
+        <div class="rf"><a class="rl" href="https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm" target="_blank">Lenin: Imperialism, Highest Stage of Capitalism</a></div>
+      </div>
+      <div class="c"><h3>Luxemburg's Insight</h3><p>Capitalism requires ever-expanding non-capitalist frontiers, but its method of incorporation <strong>destroys</strong> them. Imperialism is M-C-M' hitting the walls of the world.</p><p style="margin-top:5px;font-style:italic;font-size:12px">"IMPERIALISM is the political expression of the accumulation of capital in its competitive struggle for what remains still open of the non-capitalist environment."</p></div>
+      <div class="c"><h3>Modern Analysis</h3><p>Contemporary imperialism is a "hyper" stage: digital platforms as control infrastructure integrated with the military-intelligence apparatus &mdash; a "military-industrial-digital complex."</p><div class="rf"><a class="rl" href="https://thetricontinental.org/studies-on-contemporary-dilemmas-4-hyper-imperialism/" target="_blank">Tricontinental: Hyper-Imperialism (2023)</a></div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 7: POST-IMPERIALIST CRITERIA ======== -->
+<div class="sl" id="s8">
+  <div class="sh"><div class="lb">Part II &mdash; Post-Imperialism</div><h1>What Is a Post-Imperialist Mechanism?</h1><h2>Three criteria to resist imperial power</h2></div>
+  <div class="sb">
+    <div class="g3" style="margin-bottom:14px">
+      <div class="cc"><div class="ic">&#x1F6E1;</div><h4>Stable Under Attack</h4><p>Survives sustained assault from the most powerful nation-states. Cannot be shut down, co-opted, or destroyed.</p>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:4px;justify-content:center;flex-wrap:wrap"><span class="pill" style="background:#dc2626;color:#fff">Attack</span><span style="color:var(--g6)">&rarr;</span><span class="pill" style="background:var(--g6);color:#fff">Persists</span><span style="color:var(--g6)">&rarr;</span><span class="pill" style="background:var(--g8);color:#fff">More distributed</span></div>
+      </div>
+      <div class="cc"><div class="ic">&#x2699;</div><h4>Provides a Service</h4><p>Delivers a meaningful, functional service over time regardless of geopolitical pressure. Not theoretical &mdash; actually works.</p>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:4px;justify-content:center;flex-wrap:wrap"><span class="pill" style="background:#dc2626;color:#fff">Sanctions</span><span style="color:var(--g6)">&rarr;</span><span class="pill" style="background:var(--g6);color:#fff">Still available</span><span style="color:var(--g6)">&rarr;</span><span class="pill" style="background:var(--g8);color:#fff">Still growing</span></div>
+      </div>
+      <div class="cc"><div class="ic">&#x1F310;</div><h4>No State Reliance</h4><p>Runs autonomously. No government operates, funds, or can shut it down. Truly sovereign from the nation-state system.</p>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:4px;justify-content:center;flex-wrap:wrap"><span class="pill" style="background:var(--g8);color:#fff">No CEO</span><span class="pill" style="background:var(--g7);color:#fff">No HQ</span><span class="pill" style="background:var(--g6);color:#fff">No state operator</span></div>
+      </div>
+    </div>
+    <div class="c"><h3>Why These Criteria?</h3><p>Imperialism operates through the monopoly of violence (Lazzarato) and violent appropriation (Luxemburg). A post-imperialist mechanism must be <strong>antifragile</strong> &mdash; becoming more distributed in response to attacks.</p><p style="margin-top:5px">Post-capitalism asks: <em>"can we organize production differently?"</em> Post-imperialism asks: <strong>"can we build infrastructure that empires cannot destroy?"</strong></p></div>
+  </div>
+</div>
+
+<!-- ======== 8: BITCOIN ======== -->
+<div class="sl" id="s9">
+  <div class="sh"><div class="lb">Part II &mdash; Post-Imperialism</div><h1>Bitcoin: A Post-Imperialist Mechanism</h1><h2>16+ years, surviving every nation-state attack</h2></div>
+  <div class="sb"><div class="g2" style="align-items:start">
+    <div>
+      <div class="c"><h3>&#x1F6E1; Criterion 1: Stable Under Attack</h3>
+        <table><tr><th>Country</th><th>Ban</th><th>Outcome</th></tr>
+          <tr><td><strong>China</strong></td><td>Complete (2021)</td><td>Hashrate ATH in 6 months</td></tr>
+          <tr><td><strong>India</strong></td><td>RBI (2018)</td><td>Supreme Court struck down</td></tr>
+          <tr><td><strong>Nigeria</strong></td><td>Bank (2021)</td><td>Reversed 2023. #2 globally.</td></tr>
+          <tr><td><strong>Russia</strong></td><td>Proposed (2022)</td><td>Putin legalized mining 2024</td></tr>
+          <tr><td><strong>Bolivia</strong></td><td>First ban (2014)</td><td>Reversed 2024. Txns 2x.</td></tr>
+        </table>
+      </div>
+      <div class="c"><h3>&#x2699; Criterion 2: Provides a Service (Iran)</h3>
+        <ul><li><strong>$7.8B</strong> crypto shadow economy (2025)</li><li><strong>4.5%</strong> of global mining, ~$1B/year</li><li>IRGC moved <strong>$3B</strong> since 2023</li><li><strong>2026:</strong> BTC for Strait of Hormuz passage</li></ul>
+      </div>
+    </div>
+    <div>
+      <div class="c"><h3>&#x1F310; Criterion 3: No State Reliance</h3><ul><li>No central authority, CEO, board, or HQ</li><li>Permissionless: anyone with internet can participate</li><li>Self-regulating via mining incentives</li><li>Censorship resistant: thousands of nodes worldwide</li></ul></div>
+      <div class="hb"><h3>The China Test</h3><p>May 2021: China banned mining while controlling <strong>65%+ of hashrate</strong>.</p><ul><li>Blocks continued at ~10 min intervals</li><li>Hashrate fully recovered in 6 months</li><li>ATH by December 2021</li><li>Mining spread to 6+ new countries</li></ul><p style="margin-top:6px">The most aggressive state attack became its most significant <strong>decentralization event</strong>.</p></div>
+      <div class="sr"><div class="sp"><div class="n">99.988%</div><div class="l">Uptime since 2009</div></div><div class="sp"><div class="n">$6B+</div><div class="l">Cost to 51% attack</div></div><div class="sp"><div class="n">16+ yrs</div><div class="l">Continuous</div></div></div>
+    </div>
+  </div>
+  <div class="c" style="margin-top:10px"><h3>Timeline of Failed Bans</h3>
+    <div style="position:relative;padding:10px 0 10px 20px;border-left:3px solid var(--g6)">
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2013</span> <strong>China</strong> &mdash; PBOC bans banks from BTC services. Users move to P2P.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2014</span> <strong>Bolivia</strong> &mdash; First country to fully ban. Reversed 10 years later.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2017</span> <strong>China</strong> &mdash; Bans ICOs, closes exchanges. Activity goes offshore.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2018</span> <strong>India</strong> &mdash; RBI bans banks from crypto. Supreme Court strikes it down 2020.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:#dc2626;color:#fff">2021</span> <strong>China</strong> &mdash; Complete ban on mining + transactions. Hashrate ATH within 6 months.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2021</span> <strong>Nigeria</strong> &mdash; Bank ban. P2P explodes. Reversed 2023. Now #2 globally.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g8);color:#fff">2022</span> <strong>Russia</strong> &mdash; Central bank proposes ban. Government rejects it.</div>
+      <div style="margin-bottom:8px"><span class="pill" style="background:var(--g6);color:#fff">2024</span> <strong>Russia</strong> &mdash; Putin legalizes mining + cross-border crypto payments.</div>
+      <div><span class="pill" style="background:var(--g6);color:#fff">2024</span> <strong>Bolivia</strong> &mdash; Reverses ban. Transactions double within 3 months.</div>
+    </div>
+  </div>
+  <div class="rf"><a class="rl" href="https://www.coindesk.com/business/2026/02/28/iran-conflict-throws-the-regime-s-usd7-8-billion-crypto-ecosystem-and-bitcoin-mining-network-into-spotlight" target="_blank">CoinDesk: Iran</a> &bull; <a class="rl" href="https://www.btcpolicy.org/articles/assessing-chinas-crypto-ban-three-years-later" target="_blank">BTC Policy: China</a> &bull; <a class="rl" href="https://www.journalofdemocracy.org/articles/why-bitcoin-is-freedom-money/" target="_blank">Journal of Democracy</a></div>
+  </div>
+</div>
+
+<!-- ======== 9: UTOPIAN SOCIALISM ======== -->
+<div class="sl" id="s10">
+  <div class="sh"><div class="lb">Part III &mdash; The Defense Problem</div><h1>Utopian Socialism: A Brief History</h1><h2>Beautiful visions, fatal vulnerabilities</h2></div>
+  <div class="sb">
+    <div class="c" style="margin-bottom:10px"><h3>Definition</h3><p>Utopian socialism is a tradition of social thought that envisions an ideal society based on cooperation, equality, and communal ownership &mdash; achieved through peaceful persuasion and model communities rather than revolution. Unlike later "scientific socialism" (Marx/Engels), utopian socialists believed that demonstrating a better way of life would inspire voluntary adoption by people of all classes.</p></div>
+    <div class="g2">
+    <div>
+      <blockquote>"Any general character, from the best to the worst, may be given to any community, even to the world at large, by the application of proper means."<cite>&mdash; Robert Owen, <em>A New View of Society</em></cite></blockquote>
+      <blockquote>"Under civilization poverty is born of superabundance itself."<cite>&mdash; Charles Fourier</cite></blockquote>
+      <blockquote>"The golden age of the human race is not behind us, it is at the forefront."<cite>&mdash; Henri de Saint-Simon</cite></blockquote>
+      <blockquote>"The Utopians attempted to evolve [solutions] out of the human brain... These new social systems were foredoomed as Utopian."<cite>&mdash; Engels, <em><a href="https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm" target="_blank" class="rl">Socialism: Utopian and Scientific</a></em></cite></blockquote>
+      <div class="c"><h3>The Core Problems: Defense &amp; Scale</h3><p>Every surviving utopian community did so by being too small to threaten existing power. When socialist projects posed a real threat &mdash; Paris Commune (1871), Spain (1936), Chile (1973) &mdash; they were crushed by military force.</p><p style="margin-top:5px">Even when left alone, utopian communities could not <strong>scale</strong>. The personal trust and shared vision that held small groups together broke down as communities grew. Free-rider problems, governance disputes, and economic inefficiency prevented any secular commune from lasting beyond a few years or expanding beyond a few hundred members.</p></div>
+    </div>
+    <div>
+      <div class="c"><h3>Key Figures</h3><ul><li><strong>Robert Owen (1771-1858)</strong> &mdash; New Lanark success, New Harmony failure. Lost 80% of fortune.</li><li><strong>Charles Fourier (1772-1837)</strong> &mdash; Phalanxes of ~1,600. Proto-feminist. 25+ communities, nearly all failed.</li><li><strong>Henri de Saint-Simon (1760-1825)</strong> &mdash; Governance by scientists and industrialists.</li></ul></div>
+      <div class="c"><h3>Historical Record</h3>
+        <table><tr><th>Community</th><th>Years</th><th>Outcome</th></tr><tr><td>New Harmony</td><td>1825-27</td><td>Collapsed: free riders</td></tr><tr><td>Brook Farm</td><td>1841-47</td><td>Fire + smallpox</td></tr><tr><td>25+ Phalanxes</td><td>1840s</td><td>Failed in 2-5 years</td></tr><tr><td>Oneida</td><td>1848-81</td><td>33 yrs (religious); became corp.</td></tr></table>
+        <p style="margin-top:5px;font-size:11px;color:var(--d5)">Secular communities fail in 2-5 years. Only religious ones lasted. None developed a defense strategy.</p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 10: DEFENSE PARADOX ======== -->
+<div class="sl" id="s11">
+  <div class="sh"><div class="lb">Part III &mdash; The Defense Problem</div><h1>The Defense Paradox</h1><h2>Every political ideology faces the same question</h2></div>
+  <div class="sb">
+    <div class="c" style="padding:20px">
+      <div style="text-align:center;margin-bottom:14px"><span class="pill" style="background:var(--g8);color:#fff;font-size:13px;padding:6px 14px">Someone presents a new political ideology</span></div>
+      <div style="text-align:center;margin-bottom:14px;font-size:20px;color:var(--g6)">&darr;</div>
+      <div style="text-align:center;padding:12px;background:var(--g0);border:2px solid var(--g2);border-radius:10px;margin-bottom:14px;font-weight:600;color:var(--g8)">"How does your ideology defend itself from violence or nuclear weapons?"</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div>
+          <div style="text-align:center"><span class="pill" style="background:var(--g7);color:#fff;padding:5px 12px">Acquire nuclear weapons</span></div>
+          <div style="text-align:center;font-size:16px;color:var(--g6);margin:6px 0">&darr;</div>
+          <div style="text-align:center;padding:8px;background:var(--g0);border-radius:8px;font-size:12px;color:var(--g8);margin-bottom:8px">Who controls the weapons?</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="text-align:center;padding:8px;background:#F59E0B;color:#fff;border-radius:8px;font-size:11px;font-weight:600">Centralized state &rarr; You've recreated the nation-state</div>
+            <div style="text-align:center;padding:8px;background:var(--g0);color:var(--g8);border-radius:8px;font-size:11px">Democratic collective &rarr; How prevent authoritarianism?</div>
+          </div>
+        </div>
+        <div>
+          <div style="text-align:center"><span class="pill" style="background:var(--d5);color:#fff;padding:5px 12px">Wait for sci-fi future to arrive</span></div>
+          <div style="text-align:center;font-size:16px;color:var(--g6);margin:6px 0">&darr;</div>
+          <div style="text-align:center;padding:8px;background:var(--g0);border-radius:8px;font-size:12px;color:var(--d5);margin-bottom:8px">Force fields? Iron Dome for everyone? Magic?</div>
+          <div style="text-align:center;padding:8px;background:var(--d1);color:var(--d6);border-radius:8px;font-size:11px;font-style:italic">Not a serious option (yet)</div>
+        </div>
+        <div>
+          <div style="text-align:center"><span class="pill" style="background:var(--d6);color:#fff;padding:5px 12px">We don't acquire weapons</span></div>
+          <div style="text-align:center;font-size:16px;color:var(--g6);margin:6px 0">&darr;</div>
+          <div style="text-align:center;padding:8px;background:#dc2626;color:#fff;border-radius:8px;font-size:12px;font-weight:600">"Your political ideology is invalid &mdash; it cannot survive in the real world"</div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:16px;color:var(--g6);margin:10px 0">&darr;</div>
+      <div style="text-align:center;padding:12px;background:#dc2626;color:#fff;border-radius:10px;font-weight:700;font-size:14px">THE PARADOX: Defending utopian ideals requires abandoning them &mdash; but refusing to defend them means defeat</div>
+    </div>
+    <div class="c"><h3>The Inescapable Trap</h3><p>Seizing the instruments of coercion corrupts the thing being defended. The utopians refused coercion; the Marxists recognized that refusal meant defeat. <strong>Neither side resolved the contradiction.</strong></p></div>
+    <div class="bq" style="font-size:20px">But wait &mdash; is this really the only option?</div>
+  </div>
+</div>
+
+<!-- ======== 11: BEYOND THE BINARY ======== -->
+<div class="sl" id="s12">
+  <div class="sh"><div class="lb">Part III &mdash; The Defense Problem</div><h1>Beyond the Binary</h1><h2>If imperialism never achieves global hegemony, there are other options</h2></div>
+  <div class="sb">
+    <div class="c" style="margin-bottom:10px"><h3>The Key Assumption</h3><p>The dialogue tree assumes: acquire weapons or submit. But this only holds under <em>total global hegemony</em>. Historically, there have always been <strong>zones outside direct imperial control</strong>.</p></div>
+    <div class="g2"><div>
+      <div class="hb"><h3>The Expand / Recede Model</h3><p style="margin-top:6px">A network of autonomous collectives can <strong>expand into uncontested zones</strong> and <strong>recede from zones under imperial pressure</strong>.</p>
+        <ul style="margin-top:8px"><li>No fixed territory &mdash; the network is <strong>nomadic</strong></li><li>Physical nodes: agrarian communes, industrial cooperatives, or entire cities</li><li>When one node is threatened, assets shift to others</li><li>Grows by establishing new nodes, not defending borders</li><li>Like water, flows around obstacles</li></ul>
+      </div>
+    </div><div>
+      <div class="c"><h3>Insurance Against Imperialist Expansion</h3>
+        <div class="fs"><div class="sn">1</div><div class="st"><strong>zkTLS verification</strong> &mdash; Prove a trusted news source published about invasion / martial law in a zone</div></div>
+        <div class="fs"><div class="sn">2</div><div class="st"><strong>Parametric trigger</strong> &mdash; 3+ verified sources activate the insurance contract</div></div>
+        <div class="fs"><div class="sn">3</div><div class="st"><strong>Asset liquidation</strong> &mdash; Automatically liquidates the collective's assets in that territory</div></div>
+        <div class="fs"><div class="sn">4</div><div class="st"><strong>Relocation</strong> &mdash; Funds released by the zkTLS-verified trigger to a new zone</div></div>
+      </div>
+      <div class="c" style="background:var(--g0)"><h3>Example: Labor Rights Insurance</h3><p>Workers in a collective pay a premium that automatically relocates them and liquidates assets if labor rights are violated in their territory &mdash; e.g. right to organize is banned, minimum wage eliminated, or unions are outlawed. zkTLS verifies the legislative change through trusted news sources, triggers the smart contract &mdash; no human intermediary.</p></div>
+      <div class="rf"><a class="rl" href="https://tlsnotary.org/" target="_blank">TLSNotary</a></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======== 12: CRYPTO STATE SERVICES ======== -->
+<div class="sl" id="s13">
+  <div class="sh"><div class="lb">Part III &mdash; The Defense Problem</div><h1>Replacing State Services on Crypto Rails</h1><h2>Pensions, insurance, mutual aid, education, lending, justice</h2></div>
+  <div class="sb"><div class="g3">
+    <div class="c"><h3>Pensions</h3><ul><li>DeFi yield + time-locked vaults</li><li>UN uses blockchain for pension identity</li><li>Auto-collect, invest, distribute</li><li>No employer or government needed</li></ul></div>
+    <div class="c"><h3>Mutual Disability (Broodfonds)</h3><p>Dutch <a href="https://en.wikipedia.org/wiki/Broodfonds" target="_blank" class="rl">Broodfonds</a>: 25-50 freelancers, &euro;34-113/mo contributions, direct gifts when sick. 31,600+ members, 670 groups. On crypto: smart contract treasury, stablecoin payouts, soulbound membership.</p></div>
+    <div class="c"><h3>Parametric Insurance</h3><ul><li>Etherisc: 22,000 Kenyan farmers</li><li>Nexus Mutual: $6B+ protected</li><li>Oracle-verified auto-payouts</li><li>No forms, adjusters, or agencies</li></ul></div>
+    <div class="c"><h3>Education</h3><ul><li>On-chain credentials &amp; diplomas</li><li>P2P tutoring markets</li><li>Community-curated curricula</li><li>No ministry gatekeeping</li></ul></div>
+    <div class="c"><h3>Lending &amp; Credit</h3><ul><li>DeFi lending pools (Aave, Compound) &mdash; no bank needed</li><li>Under-collateralized loans via on-chain reputation</li><li>Community rotating savings (tontines / tandas) on smart contracts</li><li>Micro-lending without extractive interest rates</li></ul></div>
+    <div class="c"><h3>Courts &amp; Arbitration</h3><ul><li>Kleros: decentralized dispute resolution</li><li>Aragon Court: on-chain arbitration</li><li>Smart contract escrow</li><li>No national court reliance</li></ul></div>
+  </div></div>
+</div>
+
+<!-- ======== 13: P2P SANCTIONS ======== -->
+<div class="sl" id="s14">
+  <div class="sh"><div class="lb">Part IV &mdash; P2P Peace</div><h1>P2P Sanctions</h1><h2>Citizens stake their own money on peace &mdash; enforced by code, not empires</h2></div>
+  <div class="sb">
+    <div class="hb" style="margin-bottom:12px"><h3>How It Works</h3>
+      <p style="margin-top:5px">Citizens from both sides of a conflict <strong>stake their own money</strong> on specific sanctions. These sanctions are settled by an <strong>obfuscated aggregate of newspapers</strong> that both sides agree to in advance &mdash; verified cryptographically via zkTLS so no single source can be manipulated.</p>
+    </div>
+    <div class="g3" style="margin-bottom:12px">
+      <div class="c" style="border-color:var(--g6);border-width:2px;text-align:center">
+        <h3 style="color:var(--g6)">One Side Violates</h3>
+        <p style="margin-top:6px">The violating side <strong>loses their stake</strong>. The other side <strong>receives the payout</strong>. Citizens who bet on peace are rewarded; citizens whose government broke the peace pay the price.</p>
+      </div>
+      <div class="c" style="border-color:#dc2626;border-width:2px;text-align:center">
+        <h3 style="color:#dc2626">Both Sides Violate</h3>
+        <p style="margin-top:6px"><strong>Both sides lose money.</strong> Staked funds are burned or redistributed to the peace pool. Mutual aggression is a Lose/Lose &mdash; there is no scenario where violence is profitable.</p>
+      </div>
+      <div class="c" style="border-color:var(--g8);border-width:2px;text-align:center">
+        <h3 style="color:var(--g8)">Peace Holds</h3>
+        <p style="margin-top:6px"><strong>Both sides get a payout</strong> from the accumulated pool of lost funds from past violations. The longer peace holds, the larger the reward. Peace compounds.</p>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="c"><h3>Settlement: The Newspaper Oracle</h3>
+        <p>Sanctions are settled by an <strong>obfuscated aggregate</strong> of newspaper sources that both sides agree to before staking. Neither side knows the exact weighting or selection &mdash; only that verified, trusted sources are used.</p>
+        <ul><li>zkTLS cryptographically proves articles came from verified publishers</li><li>Multiple sources must corroborate before triggering settlement</li><li>No single newspaper, government, or actor can manipulate the outcome</li><li>The oracle is <strong>trustless</strong> &mdash; it doesn't require trusting any individual party</li></ul>
+      </div>
+      <div class="c"><h3>What Makes This Different</h3>
+        <ul>
+          <li><strong>Not enforced by imperialist violence or a state</strong> &mdash; enforcement is algorithmic, via smart contracts that execute automatically based on verified events</li>
+          <li><strong>Higher-bandwidth democracy</strong> &mdash; ordinary citizens get direct power over military-level decisions through quadratic voting on sanctions, not just once-every-4-years elections</li>
+          <li><strong>Programmable over centuries</strong> &mdash; sanctions can be coded to persist for hundreds of years, outlasting any single government, administration, or empire's attempt to destabilize them</li>
+          <li><strong>Resistant to imperial manipulation</strong> &mdash; no single empire can unilaterally change, lift, or enforce sanctions for political gain</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rf"><a class="rl" href="https://github.com/communetxyz/p2peace" target="_blank">GitHub: p2peace</a> &bull; <a class="rl" href="https://v0-decentralized-peace-coin.vercel.app" target="_blank">Live Demo</a></div>
+  </div>
+</div>
+
+<!-- ======== 14: P2P VERIFICATION ======== -->
+<div class="sl" id="s15">
+  <div class="sh"><div class="lb">Part IV &mdash; P2P Peace</div><h1>P2P Sanctions: Verification &amp; Game Theory</h1><h2>How citizens are verified and why the incentives work</h2></div>
+  <div class="sb"><div class="g2" style="align-items:start">
+    <div>
+      <div class="c" style="padding:14px">
+        <h3 style="margin-bottom:10px">Citizen Verification (zkTLS)</h3>
+        <div class="fs"><div class="sn">1</div><div class="st">Citizen connects government ID</div></div>
+        <div class="fs"><div class="sn">2</div><div class="st">zkTLS generates zero-knowledge proof &mdash; proves citizenship <strong>without</strong> revealing name or address</div></div>
+        <div class="fs"><div class="sn">3</div><div class="st">Verification credential issued on-chain</div></div>
+        <div class="fs"><div class="sn">4</div><div class="st">Citizen can now stake on sanctions + vote on new ones</div></div>
+      </div>
+      <div class="c"><h3>Sanctions Settlement (Newspaper Oracle)</h3>
+        <div class="fs"><div class="sn">1</div><div class="st">Both sides agree to an obfuscated set of trusted news sources</div></div>
+        <div class="fs"><div class="sn">2</div><div class="st">zkTLS monitors and cryptographically verifies published articles</div></div>
+        <div class="fs"><div class="sn">3</div><div class="st">Multiple corroborating sources trigger automatic settlement</div></div>
+        <div class="fs"><div class="sn">4</div><div class="st">Smart contract redistributes stakes &mdash; no human in the loop</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c"><h3>The Game Theory</h3>
+        <table><tr><th></th><th style="text-align:center">Country B Cooperates</th><th style="text-align:center">Country B Violates</th></tr>
+          <tr><td><strong>A Cooperates</strong></td><td style="text-align:center;background:var(--g0);color:var(--g8)"><strong>Both get peace payout</strong></td><td style="text-align:center;background:var(--g0)">A gets B's stake</td></tr>
+          <tr><td><strong>A Violates</strong></td><td style="text-align:center;background:var(--g0)">B gets A's stake</td><td style="text-align:center;background:#fef2f2;color:#dc2626"><strong>Both lose everything</strong></td></tr>
+        </table>
+        <p style="margin-top:8px">Cooperation is the <strong>dominant strategy</strong>. Even if you suspect the other side might violate, cooperating means you either get a peace payout (if they cooperate) or receive their forfeited stake (if they violate).</p>
+      </div>
+      <div class="c"><h3>P2P vs Traditional Sanctions</h3><table><tr><th>Traditional</th><th>P2P</th></tr>
+        <tr><td>Enforced by imperial violence</td><td>Enforced by smart contracts</td></tr>
+        <tr><td>Top-down (powerful nations decide)</td><td>Bottom-up (affected citizens decide)</td></tr>
+        <tr><td>Can be lifted for political gain</td><td>Persist for centuries, code is immutable</td></tr>
+        <tr><td>Low-bandwidth (one vote every 4 years)</td><td>High-bandwidth (continuous quadratic voting)</td></tr>
+        <tr><td>Empires can selectively enforce</td><td>No single actor can manipulate</td></tr>
+      </table></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ======== 15: PEACE LOOP ======== -->
+<div class="sl" id="s16">
+  <div class="sh"><div class="lb">Part IV &mdash; P2P Peace</div><h1>The Self-Reinforcing Peace Loop</h1><h2>Economic incentives over moral appeals</h2></div>
+  <div class="sb">
+    <div class="c" style="padding:16px">
+      <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px">
+        <span class="pill" style="background:var(--g8);color:#fff;padding:6px 12px">Citizens join, mint tokens</span>
+        <span style="color:var(--g6);font-size:18px">&rarr;</span>
+        <span class="pill" style="background:var(--g7);color:#fff;padding:6px 12px">Cross-border trade earns bonuses</span>
+        <span style="color:var(--g6);font-size:18px">&rarr;</span>
+        <span class="pill" style="background:var(--g6);color:#fff;padding:6px 12px">Economic interdependence grows</span>
+        <span style="color:var(--g6);font-size:18px">&rarr;</span>
+        <span class="pill" style="background:var(--g5);color:var(--d8);padding:6px 12px">Conflict becomes costly</span>
+        <span style="color:var(--g6);font-size:18px">&rarr;</span>
+        <span class="pill" style="background:var(--g8);color:#fff;padding:6px 12px">Peace = rational choice</span>
+        <span style="color:var(--g6);font-size:18px">&rarr;</span>
+        <span class="pill" style="background:var(--g7);color:#fff;padding:6px 12px">More citizens join</span>
+        <span style="color:var(--g6);font-size:18px">&#x21BA;</span>
+      </div>
+    </div>
+    <div class="g2"><div>
+      <div class="c"><h3>Example</h3><p>A Country A business owner deposits $10,000, gets 10,000 tokens. Gains Country B customers, earns 5% cross-border bonuses, benefits from network growth. Works <strong>regardless of political views</strong>.</p></div>
+    </div><div>
+      <div class="c"><h3>Graduated External Integration</h3><ul><li><strong>Level 1:</strong> Tariff reductions &mdash; initial cooperation</li><li><strong>Level 2:</strong> Trade agreements &mdash; demilitarization</li><li><strong>Level 3:</strong> Full integration &mdash; comprehensive peace</li></ul><p style="margin-top:5px;font-size:12px">Nations convert sanctions into transparent, auto-executing smart contract incentives.</p></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ======== 16: COLLECTIVIZED CURRENCY PRESSURE ======== -->
+<div class="sl" id="s17">
+  <div class="sh"><div class="lb">Part V &mdash; Economic Resistance</div><h1>Collectivized Currency Pressure</h1><h2>From Soros to the masses: economic resistance against nation-states</h2></div>
+  <div class="sb">
+    <div class="g2" style="margin-bottom:12px">
+      <div class="c"><h3>Black Wednesday: One Man Broke the Pound</h3><p><strong>Sept 16, 1992.</strong> Soros built a <strong>$10B short</strong> against the pound.</p>
+        <ul><li>Max downside ~0.5%, upside 15-20%</li><li>Bank of England spent <strong>&pound;27B</strong> defending &mdash; failed</li><li>Rates: 10% &rarr; 12% &rarr; 15% in one day &mdash; failed</li><li>UK withdrew from ERM at 7:30 PM</li><li>Soros profited ~$1.8B. Pound fell 25%.</li><li>Conservatives: 18-year exile from power.</li></ul>
+        <div class="rf"><a class="rl" href="https://en.wikipedia.org/wiki/Black_Wednesday" target="_blank">Black Wednesday</a> &bull; <a class="rl" href="https://priceonomics.com/the-trade-of-the-century-when-george-soros-broke/" target="_blank">Trade of the Century</a></div>
+      </div>
+      <div class="c"><h3>Collectivizing the Mechanism</h3><ul><li><strong>Morris &amp; Shin (1998):</strong> Attacks don't need coordination. Shared information &rarr; self-fulfilling equilibrium.</li><li><strong>GameStop (2021):</strong> Workers on forums executed institutional-grade strategies without a leader.</li><li><strong>Terra/UST (2022):</strong> Soros-style attack on crypto peg, $45B destroyed in a week.</li></ul></div>
+    </div>
+    <div class="g2">
+      <div class="hb"><h3>A Marxist Framework for Economic Resistance</h3><ul style="margin-top:5px"><li><strong>Identify:</strong> Overvalued, fragile currency peg</li><li><strong>Signal:</strong> Public reserve data replaces Soros's private conviction</li><li><strong>Coordinate:</strong> Smart contracts pool capital, execute shorts, distribute collectively</li><li><strong>Self-organize:</strong> Per Morris-Shin, workers independently act on the same signal</li></ul><p style="margin-top:6px">On-chain transparency is the equalizer: publicly visible reserves give every worker the intelligence that previously required being a billionaire.</p></div>
+      <div class="hb" style="background:var(--g7)"><h3>A Crypto Framework for Currency Pressure</h3>
+        <div class="fs"><div class="sn" style="background:#fff;color:var(--g8)">1</div><div class="st" style="color:rgba(255,255,255,.9)"><strong>Research &amp; signal</strong> &mdash; Identify an overvalued peg. Publish on-chain analysis of reserve ratios, trade deficits, debt levels. Make the signal public.</div></div>
+        <div class="fs"><div class="sn" style="background:#fff;color:var(--g8)">2</div><div class="st" style="color:rgba(255,255,255,.9)"><strong>Pool capital</strong> &mdash; Smart contract collects stablecoin deposits from participants. Each depositor receives proportional shares in the pool.</div></div>
+        <div class="fs"><div class="sn" style="background:#fff;color:var(--g8)">3</div><div class="st" style="color:rgba(255,255,255,.9)"><strong>Execute via DeFi</strong> &mdash; Pool borrows the target currency on decentralized exchanges, sells it for stablecoins, creating sell pressure. Perpetual futures on DEXs (dYdX, Hyperliquid) amplify the position with leverage.</div></div>
+        <div class="fs"><div class="sn" style="background:#fff;color:var(--g8)">4</div><div class="st" style="color:rgba(255,255,255,.9)"><strong>Distribute gains</strong> &mdash; When the peg breaks, the smart contract automatically buys back the depreciated currency, repays the loan, and distributes profits pro-rata to all participants.</div></div>
+        <p style="margin-top:8px;font-size:12px;color:rgba(255,255,255,.7)">Every step is transparent, auditable, and permissionless. No Soros required &mdash; just a smart contract and a public signal.</p>
+      </div>
+    </div>
+    <div class="c" style="margin-top:10px"><h3>How This Fulfills the Post-Imperialist Criteria</h3>
+      <div class="g3">
+        <div style="text-align:center"><span class="pill" style="background:var(--g8);color:#fff;padding:5px 10px">&#x1F6E1; Stable Under Attack</span><p style="font-size:12px;color:var(--d6);margin-top:5px">Smart contracts on decentralized blockchains cannot be shut down by any nation-state. The mechanism persists even if every government opposes it.</p></div>
+        <div style="text-align:center"><span class="pill" style="background:var(--g8);color:#fff;padding:5px 10px">&#x2699; Provides a Service</span><p style="font-size:12px;color:var(--d6);margin-top:5px">Delivers real economic pressure against overvalued currencies &mdash; a service previously available only to billionaire speculators, now accessible to ordinary workers.</p></div>
+        <div style="text-align:center"><span class="pill" style="background:var(--g8);color:#fff;padding:5px 10px">&#x1F310; No State Reliance</span><p style="font-size:12px;color:var(--d6);margin-top:5px">Runs on permissionless DeFi infrastructure. No government operates it, funds it, or authorizes it. Fully autonomous from the nation-state system.</p></div>
+      </div>
+    </div>
+    <div class="rf"><a class="rl" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=284813" target="_blank">Morris &amp; Shin (1998)</a> &bull; <a class="rl" href="https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/" target="_blank">Harvard Law: Terra Luna</a></div>
+  </div>
+</div>
+
+<!-- ======== 17: HOW TO DO IT WITH CRYPTO ======== -->
+<div class="sl" id="s18">
+  <div class="sh"><div class="lb">Part V &mdash; Economic Resistance</div><h1>The Collectivized Soros Attack</h1><h2>How ordinary people can do what one billionaire did &mdash; using crypto</h2></div>
+  <div class="sb">
+    <div class="c" style="padding:20px;margin-bottom:12px">
+      <div style="display:flex;align-items:stretch;gap:0;flex-wrap:wrap;justify-content:center">
+        <div style="flex:1;min-width:140px;text-align:center;padding:14px;background:var(--g8);color:#fff;border-radius:12px 0 0 12px">
+          <div style="font-size:28px;margin-bottom:6px">&#x1F50D;</div>
+          <div style="font-weight:700;font-size:13px">1. Find the Target</div>
+          <p style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">A country with an overvalued currency peg, high debt, shrinking reserves</p>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:14px;background:var(--g7);color:#fff">
+          <div style="font-size:28px;margin-bottom:6px">&#x1F4E2;</div>
+          <div style="font-weight:700;font-size:13px">2. Publish the Signal</div>
+          <p style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">Open-source analysis of why the peg will break. Everyone can see it. No insider info needed.</p>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:14px;background:var(--g6);color:#fff">
+          <div style="font-size:28px;margin-bottom:6px">&#x1F4B0;</div>
+          <div style="font-weight:700;font-size:13px">3. Pool Money</div>
+          <p style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">Smart contract vault collects stablecoin deposits. Each person gets proportional shares.</p>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:14px;background:var(--g5);color:var(--d8)">
+          <div style="font-size:28px;margin-bottom:6px">&#x1F4C9;</div>
+          <div style="font-weight:700;font-size:13px">4. Short the Currency</div>
+          <p style="font-size:11px;color:var(--d6);margin-top:4px">Vault opens a short position on a DeFi exchange (up to 1000x leverage on forex pairs).</p>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:14px;background:var(--g8);color:#fff;border-radius:0 12px 12px 0">
+          <div style="font-size:28px;margin-bottom:6px">&#x1F4B8;</div>
+          <div style="font-weight:700;font-size:13px">5. Peg Breaks, Split Profits</div>
+          <p style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px">Smart contract auto-closes, distributes gains pro-rata. No Soros needed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="c"><h3>Soros (1992) vs. Crypto Collective (Today)</h3>
+        <table>
+          <tr><th></th><th>Soros</th><th>Crypto Collective</th></tr>
+          <tr><td><strong>Capital needed</strong></td><td>$10 billion</td><td>$100 (or $0 via flash loans)</td></tr>
+          <tr><td><strong>Bank relationships</strong></td><td>Citibank, JPMorgan, Bankers Trust</td><td>None. Permissionless.</td></tr>
+          <tr><td><strong>Time to build position</strong></td><td>Weeks/months</td><td>One transaction</td></tr>
+          <tr><td><strong>Identity</strong></td><td>George Soros, known to all</td><td>Pseudonymous wallets</td></tr>
+          <tr><td><strong>Brokers can stop you?</strong></td><td>No (interbank OTC)</td><td>No (decentralized exchange)</td></tr>
+          <tr><td><strong>Profit distribution</strong></td><td>Fund manager decides</td><td>Smart contract, automatic</td></tr>
+          <tr><td><strong>Legal precedent</strong></td><td>Soros never charged</td><td>GameStop traders never charged</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="c"><h3>The Key Insight: You Don't Need Coordination</h3>
+          <p>Morris &amp; Shin (1998) proved mathematically that when everyone can see the same public data (reserve ratios, debt levels, trade deficits), each person independently decides to attack at the same threshold. <strong>No leader. No group chat. No conspiracy.</strong> Just shared information and rational self-interest.</p>
+          <p style="margin-top:8px">GameStop (2021) proved this empirically: millions of workers on a public forum executed an institutional-grade strategy with no central command. On-chain, the vault's growing size <em>is</em> the signal &mdash; visible to everyone, coordinating without coordinating.</p>
+        </div>
+        <div class="c" style="background:var(--g0)"><h3>What's Missing Today</h3>
+          <p>DeFi forex liquidity is still tiny vs real forex ($124M cumulative on-chain FX vs $9.6T/day traditional). This works against <strong>stablecoins and small pegs now</strong> (proven by Terra/UST's $45B collapse). Sovereign currencies require more on-chain forex liquidity &mdash; which is growing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== 18: SOCIAL / CONNECT ======== -->
+<div class="sl" id="s19">
+  <div class="il">
+    <img src="logo.png" alt="Decentral Park" style="height:100px;margin-bottom:20px">
+    <h1>Get Involved</h1>
+    <p style="margin-bottom:28px">Find us online and join the community</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:700px;text-align:center">
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">X / Twitter</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://x.com/decentralparkny" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://x.com/decentralparkny" target="_blank">@decentralparkny</a></p></div>
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">Instagram</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.instagram.com/decentralparknyc/" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://www.instagram.com/decentralparknyc/" target="_blank">@decentralparknyc</a></p></div>
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">Telegram</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://t.me/+guHaqo9XXpk5ZmNk" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://t.me/+guHaqo9XXpk5ZmNk" target="_blank">Join Telegram</a></p></div>
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">Farcaster</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://farcaster.xyz/decentralpark" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://farcaster.xyz/decentralpark" target="_blank">decentralpark</a></p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:520px;margin-top:12px;text-align:center">
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">LinkedIn</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.linkedin.com/company/decentral-park/" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://www.linkedin.com/company/decentral-park/" target="_blank">Decentral Park</a></p></div>
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">Events</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://lu.ma/user/usr-WzTqp46PMChk8Xl" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://lu.ma/user/usr-WzTqp46PMChk8Xl" target="_blank">Luma Events</a></p></div>
+      <div class="c" style="padding:14px"><h3 style="font-size:13px">GitHub</h3><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://github.com/decentralparknyc" alt="QR" style="width:100%;max-width:120px;margin:8px auto;display:block;border-radius:6px"><p style="font-size:11px"><a class="rl" href="https://github.com/decentralparknyc" target="_blank">decentralparknyc</a></p></div>
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:var(--d5)">nycryptoleft@gmail.com</p>
+  </div>
+</div>
+
+</div>
+
+<div class="nb">
+  <div class="br"><img src="logo.png" alt="" style="height:28px">DECENTRAL PARK</div>
+  <div class="ct">
+    <button id="pb" onclick="go(-1)" disabled>&larr;</button>
+    <span class="cn" id="cn">1 / 16</span>
+    <button id="nb" onclick="go(1)">&rarr;</button>
+    
+  </div>
+</div>
+
+<script>
+mermaid.initialize({startOnLoad:true,theme:'base',securityLevel:'loose',themeVariables:{primaryColor:'#F0FDF4',primaryTextColor:'#166534',primaryBorderColor:'#BBF7D0',lineColor:'#16A34A',secondaryColor:'#D1FAE5',tertiaryColor:'#DCFCE7',fontFamily:'Inter,sans-serif'},flowchart:{curve:'basis',htmlLabels:true}});
+var cur=1,tot=19;
+var tt={1:"What Is Capitalism?",2:"What Is Post-Capitalism?",3:"Example: Wikipedia",4:"Example: Mutual Vend",5:"Speculative Post-Capitalism: POCAS",6:"Interlude",7:"What Is Imperialism?",8:"Post-Imperialist Mechanisms",9:"Bitcoin",10:"Utopian Socialism",11:"Defense Paradox",12:"Beyond the Binary",13:"Crypto State Services",14:"P2P Sanctions",15:"P2P Sanctions Verification",16:"Peace Loop",17:"Collectivized Currency Pressure",18:"The Collectivized Soros Attack",19:"Get Involved"};
+function go(d){cur+=d;if(cur<1)cur=1;if(cur>tot)cur=tot;document.querySelectorAll('.sl').forEach(function(s){s.classList.remove('on')});document.getElementById('s'+cur).classList.add('on');document.getElementById('cn').textContent=cur+' / '+tot;document.getElementById('pb').disabled=cur===1;document.getElementById('nb').disabled=cur===tot}
+document.addEventListener('keydown',function(e){if(e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
+</script>
+</body>
+</html>
+
