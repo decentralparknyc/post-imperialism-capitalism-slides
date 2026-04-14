@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Capitalism & Post-Imperialism</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --green-800: #166534;
+    --green-700: #15803D;
+    --green-600: #16A34A;
+    --green-500: #22C55E;
+    --green-200: #BBF7D0;
+    --green-100: #DCFCE7;
+    --green-50: #F0FDF4;
+    --emerald-100: #D1FAE5;
+    --gray-800: #1F2937;
+    --gray-600: #4B5563;
+    --gray-500: #6B7280;
+    --gray-100: #F3F4F6;
+    --white: #FFFFFF;
+    --near-black: #0A0A0A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    background: linear-gradient(to right bottom, var(--green-50), var(--emerald-100));
+    color: var(--near-black);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 40px 60px;
+    overflow-y: auto;
+  }
+
+  .slide.active { display: flex; }
+
+  .slide-header {
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+
+  .slide-header .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green-600);
+    margin-bottom: 8px;
+  }
+
+  .slide-header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--green-800);
+    line-height: 1.1;
+  }
+
+  .slide-header h2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--green-700);
+    margin-top: 8px;
+  }
+
+  .slide-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--green-200);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green-800);
+    margin-bottom: 8px;
+  }
+
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.7;
+  }
+
+  .card ul { padding-left: 18px; }
+  .card li { margin-bottom: 4px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .four-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--green-600);
+    padding: 10px 16px;
+    margin: 10px 0;
+    background: var(--green-50);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray-800);
+    line-height: 1.6;
+  }
+
+  blockquote cite {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--green-700);
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .big-question {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--green-800);
+    margin: 30px 0;
+    padding: 24px;
+    background: var(--white);
+    border: 2px solid var(--green-200);
+    border-radius: 16px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+  .tag-green { background: var(--green-100); color: var(--green-800); }
+  .tag-gray { background: var(--gray-100); color: var(--gray-800); }
+
+  .ref-link {
+    font-size: 11px;
+    color: var(--green-600);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .ref-link:hover { text-decoration: underline; }
+
+  .refs {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+
+  /* Navigation */
+  .nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: var(--green-800);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+  }
+
+  .nav-bar .brand {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-bar .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-bar button {
+    background: var(--green-600);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .nav-bar button:hover { background: var(--green-500); }
+  .nav-bar button:disabled { opacity: 0.4; cursor: default; }
+
+  .nav-bar .counter {
+    color: var(--green-200);
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* XY Graph */
+  .goods-graph {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+
+  .goods-graph .axis-x, .goods-graph .axis-y {
+    position: absolute;
+    background: var(--green-800);
+  }
+  .goods-graph .axis-x {
+    width: 100%; height: 2px;
+    top: 50%; left: 0;
+  }
+  .goods-graph .axis-y {
+    width: 2px; height: 100%;
+    left: 50%; top: 0;
+  }
+
+  .goods-graph .label {
+    position: absolute;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--green-800);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .goods-graph .label-top { top: -4px; left: 50%; transform: translateX(-50%); }
+  .goods-graph .label-bottom { bottom: -4px; left: 50%; transform: translateX(-50%); }
+  .goods-graph .label-left { left: -4px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: left center; }
+  .goods-graph .label-right { right: -4px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: right center; }
+
+  .goods-graph .quadrant {
+    position: absolute;
+    width: 48%;
+    height: 46%;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+  .goods-graph .q-tl { top: 2%; left: 1%; background: rgba(22,101,52,0.08); }
+  .goods-graph .q-tr { top: 2%; right: 1%; background: rgba(22,163,74,0.08); }
+  .goods-graph .q-bl { bottom: 2%; left: 1%; background: rgba(21,128,61,0.08); }
+  .goods-graph .q-br { bottom: 2%; right: 1%; background: rgba(34,197,94,0.08); }
+
+  .goods-graph .quadrant h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-800);
+    margin-bottom: 6px;
+  }
+  .goods-graph .quadrant p {
+    font-size: 11px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  /* Mermaid override */
+  .mermaid {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--green-200);
+    margin: 12px 0;
+    text-align: center;
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 16px;
+  }
+  .stat-box .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--green-800);
+  }
+  .stat-box .label {
+    font-size: 12px;
+    color: var(--gray-600);
+    margin-top: 4px;
+    position: static;
+    transform: none;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+
+  .highlight-box {
+    background: var(--green-800);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 12px 0;
+  }
+  .highlight-box h3 { color: var(--green-200); }
+  .highlight-box p, .highlight-box li { color: rgba(255,255,255,0.85); }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .flow-step .step-num {
+    width: 28px; height: 28px;
+    background: var(--green-600);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .flow-step .step-text {
+    font-size: 13px;
+    color: var(--gray-800);
+    line-height: 1.5;
+  }
+
+  .slide-body::-webkit-scrollbar { width: 6px; }
+  .slide-body::-webkit-scrollbar-track { background: transparent; }
+  .slide-body::-webkit-scrollbar-thumb { background: var(--green-200); border-radius: 3px; }
+
+  .footnote {
+    font-size: 10px;
+    color: var(--gray-500);
+    margin-top: 8px;
+  }
+
+  .comment-box {
+    margin-top: 16px;
+    flex-shrink: 0;
+  }
+
+  .comment-box label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green-700);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .comment-box textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 14px;
+    border: 1px solid var(--green-200);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--near-black);
+    background: var(--white);
+    resize: vertical;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .comment-box textarea:focus {
+    border-color: var(--green-600);
+    box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
+  }
+
+  .comment-box textarea::placeholder {
+    color: var(--gray-500);
+  }
+
+  .copy-all-btn {
+    background: var(--white);
+    color: var(--green-800);
+    border: 2px solid var(--green-600);
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    margin-left: 12px;
+    transition: all 0.15s;
+  }
+  .copy-all-btn:hover {
+    background: var(--green-600);
+    color: var(--white);
+  }
+  .copy-all-btn.copied {
+    background: var(--green-800);
+    color: var(--white);
+    border-color: var(--green-800);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  th {
+    background: var(--green-50);
+    color: var(--green-800);
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--green-200);
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    color: var(--gray-600);
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+
+<div class="slide-container">
+
+<!-- ==================== SLIDE 1: THE GOODS MATRIX ==================== -->
+<div class="slide active" id="slide-1">
+  <div class="slide-header">
+    <div class="section-label">Part I &mdash; Post-Capitalism</div>
+    <h1>What Kinds of Goods Exist?</h1>
+    <h2>Capitalism is optimized for one quadrant. What about the others?</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col" style="align-items: start;">
+      <div class="goods-graph">
+        <div class="axis-x"></div>
+        <div class="axis-y"></div>
+        <div class="label label-top">Non-Rivalrous</div>
+        <div class="label label-bottom">Rivalrous</div>
+        <div class="label label-left">Public (Non-Excludable)</div>
+        <div class="label label-right">Private (Excludable)</div>
+
+        <div class="quadrant q-tl">
+          <h4>Public Goods</h4>
+          <p>Non-rivalrous + Non-excludable. Everyone benefits, no one is excluded.</p>
+          <p style="margin-top:6px;"><strong>Examples:</strong> National defense, street lighting, open-source software, mathematical knowledge, clean air</p>
+          <p style="margin-top:4px; font-size:10px; color:var(--green-700);">Markets systematically underprovide these (free rider problem)</p>
+        </div>
+
+        <div class="quadrant q-tr">
+          <h4>Club Goods</h4>
+          <p>Non-rivalrous + Excludable. Access restricted, but use doesn't diminish supply.</p>
+          <p style="margin-top:6px;"><strong>Examples:</strong> Netflix, toll roads, cinemas, gyms, encrypted WiFi, gated communities</p>
+          <p style="margin-top:4px; font-size:10px; color:var(--green-700);">Requires artificial exclusion mechanisms (DRM, paywalls)</p>
+        </div>
+
+        <div class="quadrant q-bl">
+          <h4>Common-Pool Resources</h4>
+          <p>Rivalrous + Non-excludable. Open access, but consumption depletes.</p>
+          <p style="margin-top:6px;"><strong>Examples:</strong> Ocean fisheries, groundwater, forests, the atmosphere, wild game</p>
+          <p style="margin-top:4px; font-size:10px; color:var(--green-700);">"Tragedy of the Commons" &mdash; Hardin (1968)</p>
+        </div>
+
+        <div class="quadrant q-br">
+          <h4>Private Goods</h4>
+          <p>Rivalrous + Excludable. <strong>Capitalism's sweet spot.</strong></p>
+          <p style="margin-top:6px;"><strong>Examples:</strong> Food, clothing, cars, houses, smartphones, oil</p>
+          <p style="margin-top:4px; font-size:10px; color:var(--green-700);">Price signals, profit motive, property rights all work here</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Capitalism Works For One Quadrant</h3>
+          <p>The entire market mechanism &mdash; price signals, profit motive, private property, competition &mdash; is optimized for <strong>rivalrous + excludable</strong> goods. It encounters systematic failures everywhere else:</p>
+          <ul>
+            <li><strong>Public goods:</strong> Underprovided (no profit incentive)</li>
+            <li><strong>Commons:</strong> Over-exploited (tragedy of the commons)</li>
+            <li><strong>Club goods:</strong> Require artificial scarcity (DRM, IP law)</li>
+          </ul>
+          <div class="refs">
+            Samuelson (1954), Musgrave (1959), Buchanan (1965), Ostrom (1990 &mdash; Nobel 2009)<br>
+            <a class="ref-link" href="https://plato.stanford.edu/entries/public-goods/" target="_blank">Stanford Encyclopedia: Public Goods</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>The Digital Shift</h3>
+          <p>Digital goods (software, data, AI models, knowledge) are inherently <strong>non-rivalrous</strong> &mdash; copying costs nothing. As Jeremy Rifkin argues, capitalism's internal contradiction is that competitive markets drive marginal costs to zero, but capitalism <em>requires</em> scarcity to generate profit.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://www.socialeurope.eu/time-for-postcapitalism" target="_blank">Paul Mason: "Time for Postcapitalism"</a> &bull;
+            <a class="ref-link" href="https://www.cip.org/supermodular" target="_blank">CIP: Supermodular</a>
+          </div>
+        </div>
+
+        <div class="big-question">Okay, so what is post-capitalism?</div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="1" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 2: POST-CAPITALISM DEFINED ==================== -->
+<div class="slide" id="slide-2">
+  <div class="slide-header">
+    <div class="section-label">Part I &mdash; Post-Capitalism</div>
+    <h1>What Is Post-Capitalism?</h1>
+    <h2>Collective ownership, no state reliance, better for everyone</h2>
+  </div>
+  <div class="slide-body">
+    <div class="highlight-box" style="margin-bottom:16px;">
+      <h3 style="font-size:18px; margin-bottom:10px;">A post-capitalist mechanism satisfies all three criteria:</h3>
+      <div class="three-col" style="margin-top:12px;">
+        <div>
+          <div style="font-size:28px; margin-bottom:6px;">1</div>
+          <p><strong>Collective ownership</strong> without any state means &mdash; not state socialism, not charity, not custodial</p>
+        </div>
+        <div>
+          <div style="font-size:28px; margin-bottom:6px;">2</div>
+          <p><strong>Better than the capitalist alternative</strong> for both consumers and workers</p>
+        </div>
+        <div>
+          <div style="font-size:28px; margin-bottom:6px;">3</div>
+          <p><strong>Survives without charity or custody</strong> &mdash; structurally incentivized, not dependent on altruism</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Example: Wikipedia</h3>
+          <p>The canonical post-capitalist organization. Paul Mason, Yochai Benkler, and Michel Bauwens all cite it as a working model of commons-based peer production (CBPP).</p>
+          <ul>
+            <li><strong>Collectively owned</strong> &mdash; no shareholders, no CEO, governed by community</li>
+            <li><strong>Better for consumers</strong> &mdash; free, comprehensive, available in 300+ languages</li>
+            <li><strong>Better for contributors</strong> &mdash; intrinsic motivation, no wage labor exploitation</li>
+            <li><strong>No state involvement</strong> &mdash; Wikimedia Foundation is a nonprofit, not a government entity</li>
+            <li><strong>Not charity</strong> &mdash; structurally self-sustaining through voluntary donations and volunteer contributions</li>
+          </ul>
+          <div class="refs">
+            <a class="ref-link" href="https://en.wikipedia.org/wiki/Commons-based_peer_production" target="_blank">Commons-based peer production</a> &bull;
+            <a class="ref-link" href="https://en.wikipedia.org/wiki/PostCapitalism" target="_blank">Paul Mason: PostCapitalism (2015)</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Example: The Mutual Vending Machine</h3>
+          <p>A collectively-owned vending machine where the community owns the hardware and inventory. Profits go back to the collective rather than a private operator. No landlord, no franchise fees, no corporate extraction.</p>
+          <ul>
+            <li>Lower prices for consumers (no profit margin extracted)</li>
+            <li>Revenue funds community initiatives instead of shareholder returns</li>
+            <li>Maintenance and restocking organized by members cooperatively</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Applying the Model: The Mutual Laundromat</h3>
+          <p>The same vending machine model scales to a <strong>collectively-owned laundromat</strong>:</p>
+          <ul>
+            <li><strong>No landlord extraction:</strong> Community owns or collectively leases the space</li>
+            <li><strong>No franchise fees:</strong> Machines purchased collectively, not leased from a corporation</li>
+            <li><strong>Lower prices:</strong> Cost-recovery pricing instead of profit-maximizing pricing</li>
+            <li><strong>Better maintenance:</strong> Users have direct stake in upkeep; no absentee owner neglect</li>
+            <li><strong>Revenue stays local:</strong> Surplus funds community programs, not distant investors</li>
+            <li><strong>Democratic governance:</strong> Members vote on hours, pricing, improvements</li>
+          </ul>
+          <p style="margin-top:8px;">A capitalist laundromat extracts ~30-40% profit margin. A mutual laundromat returns that margin to users as lower prices or reinvests in the community.</p>
+        </div>
+
+        <div class="card">
+          <h3>Key Thinkers</h3>
+          <ul>
+            <li><strong>Paul Mason</strong> &mdash; <em>PostCapitalism</em> (2015): Information technology drives marginal costs to zero, making scarcity-based economics obsolete</li>
+            <li><strong>Yochai Benkler</strong> &mdash; Coined "commons-based peer production" (2002)</li>
+            <li><strong>Michel Bauwens</strong> &mdash; P2P Foundation: "generative post-capitalist market forms"</li>
+            <li><strong>Peter Drucker</strong> &mdash; <em>Post-Capitalist Society</em> (1993): Knowledge as the decisive factor of production</li>
+            <li><strong>Nick Srnicek & Alex Williams</strong> &mdash; <em>Inventing the Future</em> (2015): Full automation + UBI</li>
+          </ul>
+          <div class="refs">
+            <a class="ref-link" href="https://en.wikipedia.org/wiki/Post-capitalism" target="_blank">Wikipedia: Post-capitalism</a> &bull;
+            <a class="ref-link" href="https://antipodeonline.org/2020/02/19/interview-with-michel-bauwens/" target="_blank">Bauwens interview</a> &bull;
+            <a class="ref-link" href="https://www.versobooks.com/products/148-inventing-the-future" target="_blank">Inventing the Future</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="2" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 3: POCAS - SPECULATIVE POST-CAPITALISM ==================== -->
+<div class="slide" id="slide-3">
+  <div class="slide-header">
+    <div class="section-label">Part I &mdash; Post-Capitalism</div>
+    <h1>Speculative Post-Capitalism: POCAS</h1>
+    <h2>What if you reimagined the convenience store as a mutualist network?</h2>
+  </div>
+  <div class="slide-body">
+    <div class="card" style="margin-bottom:16px;">
+      <h3>POCA &mdash; Organizacion Cooperativa de Autoservicio</h3>
+      <p><a href="https://pocas.store" target="_blank" class="ref-link" style="font-size:14px;">pocas.store</a> is a speculative design project &mdash; "economic science-fiction" &mdash; that reimagines the ubiquitous convenience store (OXXO, 7-Eleven) as a node in a collectively-owned mutualist network. It appropriates the aesthetics and efficiency of capitalist retail while replacing the profit motive with cooperative exchange.</p>
+    </div>
+
+    <div class="three-col">
+      <div class="card">
+        <h3>Plural Exchange Systems</h3>
+        <ul>
+          <li><strong>Plural Markets</strong> &mdash; Mutual credit ("poco credito"), vouchers, time-banking, or conventional money</li>
+          <li><strong>Free-Stores</strong> &mdash; Gift economy sections where goods are simply given</li>
+          <li><strong>Coop Shops</strong> &mdash; Inter-store commerce between pocas locations</li>
+          <li><strong>Cosa-teca</strong> &mdash; Shared tool libraries (borrow, don't buy)</li>
+          <li><strong>Pocos Pesos</strong> &mdash; Internal cryptocurrency pegged 1:1 to the Mexican peso</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Spin-off Cooperatives (MUCHAs)</h3>
+        <ul>
+          <li><strong>Saltaharinas</strong> &mdash; Insect protein production</li>
+          <li><strong>Dulce Dolor</strong> &mdash; Artisanal candy cooperative</li>
+          <li><strong>La Farmacia Trans+Feminista</strong> &mdash; Autonomous pharmaceutical documentation</li>
+          <li><strong>Maquinas de Hogar</strong> &mdash; Open-hardware appliance workshops</li>
+          <li><strong>Vegetales con Patas</strong> &mdash; Vegan meat alternatives lab</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Infrastructure & Governance</h3>
+        <ul>
+          <li>Mesh networks independent of ISPs</li>
+          <li>Communal computers from recycled hardware</li>
+          <li>Cargo bikes & speculative autonomous vehicles</li>
+          <li>Democratic assemblies with subsidiarity</li>
+          <li>"Balanced jobs" mixing desirable and monotonous work</li>
+          <li>FoCos (Communal Funds) for grants, loans, insurance</li>
+          <li>Compensation based on effort, not market value</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <h3>Intellectual Lineage</h3>
+      <p>POCAS draws on indigenous governance (tequio, Iroquois confederalism), anarcho-syndicalism, platform cooperativism, solidarity economics, feminist care work, and distributed ledger technologies. The project asks: <strong>could distributed computing make historical mutualist practices viable at modern urban scale?</strong></p>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="3" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 4: WHAT IS IMPERIALISM ==================== -->
+<div class="slide" id="slide-4">
+  <div class="slide-header">
+    <div class="section-label">Part II &mdash; Post-Imperialism</div>
+    <h1>What Is Imperialism?</h1>
+    <h2>A system of dispossession in the service of capital</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <blockquote>
+          Imperialism is "no less than a systemic dispossessive relation to the living and the life-making capacities of the colonized that operates in the debased service of the reproduction of capital in all its forms."
+          <cite>&mdash; Neferti Tadiar, <em>Remaindered Life</em> (2022)</cite>
+        </blockquote>
+
+        <blockquote>
+          Imperialism means "the subsumption of people, their forms of social cooperation and social reproduction, within the structures of production and reproduction of this global mode of life."
+          <cite>&mdash; Neferti Tadiar</cite>
+        </blockquote>
+
+        <blockquote>
+          "It is probably no accident that the words 'empire' and 'imperialism' entered the language in 1870, soon after the laying of the transatlantic cable. ... It was the cable and telegraph, backed, of course, by sea power, that turned colonialism into imperialism: a system in which the center of an empire could dictate rather than merely respond to the margin."
+          <cite>&mdash; James Carey, <em>Communication as Culture</em> (2009, p. 163)</cite>
+        </blockquote>
+
+        <blockquote>
+          "Military action is the other necessary and unavoidable face of dollar imperialism."
+          <cite>&mdash; Maurizio Lazzarato, <em>War and Money</em></cite>
+        </blockquote>
+
+        <blockquote>
+          "Imperialism is the right of life and death over the population."
+          <cite>&mdash; Maurizio Lazzarato</cite>
+        </blockquote>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Lenin's Four Features of Imperialism (1916)</h3>
+          <ul>
+            <li><span class="tag tag-green">Financialization</span> The merging of bank and industrial capital into a financial oligarchy</li>
+            <li><span class="tag tag-green">Colonization</span> The territorial division of the world among capitalist powers</li>
+            <li><span class="tag tag-green">Monopoly</span> Concentration of production into monopolies that dominate economic life</li>
+            <li><span class="tag tag-green">War</span> Armed conflict as the mechanism for redividing territories and markets</li>
+          </ul>
+          <div class="refs">
+            <a class="ref-link" href="https://www.marxists.org/archive/lenin/works/1916/imp-hsc/ch07.htm" target="_blank">Lenin: Imperialism, the Highest Stage of Capitalism, Ch. VII</a>
+          </div>
+        </div>
+
+        <blockquote>
+          "From the standpoint of capitalism... the violent appropriation of the colonial countries' most important means of production is a question of life or death for it."
+          <cite>&mdash; Rosa Luxemburg, <em>The Accumulation of Capital</em> (1913)</cite>
+        </blockquote>
+
+        <div class="card">
+          <h3>Luxemburg's Key Insight</h3>
+          <p>Non-capitalist resources from colonized countries are <strong>exterminated</strong> in the process of colonial appropriation. Capitalism requires ever-expanding non-capitalist frontiers to survive, but its method of incorporation destroys those frontiers.</p>
+          <p style="margin-top:6px; font-style:italic; font-size:13px;">"IMPERIALISM is the political expression of the accumulation of capital in its competitive struggle for what remains still open of the non-capitalist environment."</p>
+          <div class="refs">
+            <a class="ref-link" href="https://www.marxists.org/archive/luxemburg/1913/accumulation-capital/ch31.htm" target="_blank">Luxemburg: Accumulation of Capital, Ch. 31</a> &bull;
+            <a class="ref-link" href="https://thetricontinental.org/studies-on-contemporary-dilemmas-4-hyper-imperialism/" target="_blank">Tricontinental: Hyper-Imperialism (2023)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="4" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 5: POST-IMPERIALIST MECHANISMS ==================== -->
+<div class="slide" id="slide-5">
+  <div class="slide-header">
+    <div class="section-label">Part II &mdash; Post-Imperialism</div>
+    <h1>What Is a Post-Imperialist Mechanism?</h1>
+    <h2>Three criteria a system must satisfy</h2>
+  </div>
+  <div class="slide-body">
+    <div class="three-col" style="margin-bottom: 20px;">
+      <div class="highlight-box" style="text-align:center;">
+        <div style="font-size:48px; margin-bottom:12px;">1</div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Stable Under Attack</h3>
+        <p>Sufficiently stable over time even under sustained attack from massive imperialist countries. Cannot be shut down, co-opted, or destroyed by nation-states.</p>
+      </div>
+      <div class="highlight-box" style="text-align:center;">
+        <div style="font-size:48px; margin-bottom:12px;">2</div>
+        <h3 style="font-size:18px; margin-bottom:8px;">Provides a Service</h3>
+        <p>Sufficiently provides a meaningful service that persists over time, even under sustained attack. The service remains available regardless of geopolitical pressure.</p>
+      </div>
+      <div class="highlight-box" style="text-align:center;">
+        <div style="font-size:48px; margin-bottom:12px;">3</div>
+        <h3 style="font-size:18px; margin-bottom:8px;">No State Reliance</h3>
+        <p>Runs autonomously without any state involvement. No government operates it, funds it, or can shut it down. It is truly sovereign from the nation-state system.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Why These Criteria Matter</h3>
+      <p>Imperialism operates through the <strong>monopoly of violence</strong> (Lazzarato) and the <strong>violent appropriation of means of production</strong> (Luxemburg). A post-imperialist mechanism must therefore be fundamentally resistant to violence, coercion, and state capture. It must be <strong>antifragile</strong> to imperial pressure &mdash; not merely surviving attacks, but becoming more distributed and resilient in response to them.</p>
+      <p style="margin-top:8px;">This is a radically different framing from post-capitalism, which primarily asks "can we organize production differently?" Post-imperialism asks: <strong>"can we build infrastructure that empires cannot destroy?"</strong></p>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="5" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 6: BITCOIN AS POST-IMPERIALIST ==================== -->
+<div class="slide" id="slide-6">
+  <div class="slide-header">
+    <div class="section-label">Part II &mdash; Post-Imperialism</div>
+    <h1>Bitcoin: A Post-Imperialist Mechanism</h1>
+    <h2>16+ years of operation, surviving every nation-state attack</h2>
+  </div>
+  <div class="slide-body">
+    <div class="four-col" style="margin-bottom:16px;">
+      <div class="card stat-box">
+        <div class="num">99.988%</div>
+        <div class="label">Network uptime since 2009</div>
+      </div>
+      <div class="card stat-box">
+        <div class="num">$6B+</div>
+        <div class="label">Cost to 51% attack (Duke Univ.)</div>
+      </div>
+      <div class="card stat-box">
+        <div class="num">0</div>
+        <div class="label">Successful state shutdowns</div>
+      </div>
+      <div class="card stat-box">
+        <div class="num">16+ yrs</div>
+        <div class="label">Continuous operation</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Iran: Bitcoin as Sanctions Evasion</h3>
+          <ul>
+            <li><strong>$7.8B</strong> crypto shadow economy (Chainalysis, 2025)</li>
+            <li><strong>4.5%</strong> of global Bitcoin mining, generating ~$1B/year in revenue</li>
+            <li>IRGC moved <strong>$3B</strong> in crypto since 2023 across 5,000+ wallets</li>
+            <li>Central Bank of Iran acquired <strong>$507M</strong> in USDT stablecoins</li>
+            <li><strong>2026:</strong> Bitcoin accepted for passage through the Strait of Hormuz</li>
+          </ul>
+          <p style="margin-top:8px; font-size:12px;">Iran converts subsidized electricity into Bitcoin, bypassing sanctions on financial institutions entirely.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://www.coindesk.com/business/2026/02/28/iran-conflict-throws-the-regime-s-usd7-8-billion-crypto-ecosystem-and-bitcoin-mining-network-into-spotlight" target="_blank">CoinDesk: Iran's $7.8B Crypto Economy</a> &bull;
+            <a class="ref-link" href="https://www.elliptic.co/blog/how-iran-uses-bitcoin-mining-to-evade-sanctions" target="_blank">Elliptic: Iran Bitcoin Mining</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Failed Bans: Nation States That Tried &amp; Failed</h3>
+          <table>
+            <tr><th>Country</th><th>Ban</th><th>Outcome</th></tr>
+            <tr><td><strong>China</strong></td><td>Complete ban (2021)</td><td>Hashrate recovered in 6 months; ATH by Dec 2021. China still 20% of hash.</td></tr>
+            <tr><td><strong>India</strong></td><td>RBI ban (2018)</td><td>Supreme Court struck it down (2020) as "manifestly arbitrary."</td></tr>
+            <tr><td><strong>Nigeria</strong></td><td>Bank ban (2021)</td><td>P2P trading exploded. Reversed Dec 2023. Now #2 globally in adoption.</td></tr>
+            <tr><td><strong>Russia</strong></td><td>Proposed ban (2022)</td><td>Rejected. Putin legalized mining Aug 2024 to evade sanctions.</td></tr>
+            <tr><td><strong>Bolivia</strong></td><td>First country to ban (2014)</td><td>Reversed June 2024. Transactions doubled within 3 months.</td></tr>
+          </table>
+          <div class="refs">
+            <a class="ref-link" href="https://www.btcpolicy.org/articles/assessing-chinas-crypto-ban-three-years-later" target="_blank">BTC Policy: China Ban Assessment</a> &bull;
+            <a class="ref-link" href="https://techcrunch.com/2020/03/03/india-lifts-ban-on-cryptocurrency-trading/" target="_blank">TechCrunch: India Lifts Ban</a> &bull;
+            <a class="ref-link" href="https://www.journalofdemocracy.org/articles/why-bitcoin-is-freedom-money/" target="_blank">Journal of Democracy: Bitcoin Is Freedom Money</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="6" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 7: UTOPIAN SOCIALISM ==================== -->
+<div class="slide" id="slide-7">
+  <div class="slide-header">
+    <div class="section-label">Part III &mdash; The Defense Problem</div>
+    <h1>Utopian Socialism: A Brief History</h1>
+    <h2>Beautiful visions, fatal vulnerabilities</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <blockquote>
+          "Any general character, from the best to the worst, from the most ignorant to the most enlightened, may be given to any community, even to the world at large, by the application of proper means."
+          <cite>&mdash; Robert Owen, <em>A New View of Society</em></cite>
+        </blockquote>
+        <blockquote>
+          "Under civilization poverty is born of superabundance itself."
+          <cite>&mdash; Charles Fourier</cite>
+        </blockquote>
+        <blockquote>
+          "The golden age of the human race is not behind us, it is at the forefront, it is in the perfection of the social order."
+          <cite>&mdash; Henri de Saint-Simon</cite>
+        </blockquote>
+        <blockquote>
+          "The solution of the social problems, which as yet lay hidden in undeveloped economic conditions, the Utopians attempted to evolve out of the human brain."
+          <cite>&mdash; Friedrich Engels, <em>Socialism: Utopian and Scientific</em> (1880)</cite>
+        </blockquote>
+
+        <div class="card">
+          <h3>The Core Problem</h3>
+          <p>Engels' critique: utopian socialists <strong>rejected class struggle and revolutionary action</strong>, hoping to transform society through peaceful persuasion and model experiments. They appealed to all humanity at once rather than organizing the proletariat as a revolutionary class.</p>
+          <p style="margin-top:8px;">But the deeper problem is <strong>defense</strong>. Every utopian community that survived did so by being too small to threaten existing power. When socialist projects posed a genuine threat &mdash; the Paris Commune (1871), revolutionary Spain (1936), Allende's Chile (1973) &mdash; they were crushed by military force.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://www.marxists.org/archive/marx/works/1880/soc-utop/ch01.htm" target="_blank">Engels: Socialism Utopian & Scientific, Ch. 1</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Key Figures</h3>
+          <ul>
+            <li><strong>Robert Owen (1771-1858)</strong> &mdash; Welsh industrialist. Proved humane conditions + profitability at New Lanark. Founded New Harmony, Indiana (collapsed in 2 years). Lost 80% of his fortune.</li>
+            <li><strong>Charles Fourier (1772-1837)</strong> &mdash; Proposed "phalanxes" of ~1,600 people. Rejected work-as-virtue. Proto-feminist. 25+ communities attempted, almost all failed within 2-5 years.</li>
+            <li><strong>Henri de Saint-Simon (1760-1825)</strong> &mdash; Envisioned governance by scientists and industrialists. Coined "administration of things" (later adopted by Marx).</li>
+            <li><strong>Etienne Cabet</strong> &mdash; "Icarian" communes in TX, IL, IA, CA (1848-1890s). Plagued by internal disputes.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Historical Record</h3>
+          <table>
+            <tr><th>Community</th><th>Years</th><th>Outcome</th></tr>
+            <tr><td>New Harmony</td><td>1825-27</td><td>Collapsed: free riders, no skilled workers</td></tr>
+            <tr><td>Brook Farm</td><td>1841-47</td><td>Fire + smallpox ended it</td></tr>
+            <tr><td>25+ Fourierist Phalanxes</td><td>1840s</td><td>Nearly all failed within 2-5 years</td></tr>
+            <tr><td>Oneida</td><td>1848-81</td><td>33 years (religious basis); became a corporation</td></tr>
+          </table>
+          <p style="margin-top:8px; font-size:12px; color:var(--gray-500);">Pattern: secular utopian communities fail in 2-5 years. Only religious communities survived longer. None developed a defense strategy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="7" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 8: DIALOGUE TREE ==================== -->
+<div class="slide" id="slide-8">
+  <div class="slide-header">
+    <div class="section-label">Part III &mdash; The Defense Problem</div>
+    <h1>The Defense Paradox</h1>
+    <h2>Every political ideology faces the same question</h2>
+  </div>
+  <div class="slide-body">
+    <div class="mermaid">
+graph TD
+    A["Someone presents a new<br/>political ideology"] --> B{"How does your ideology<br/>defend itself from violence<br/>or nuclear weapons?"}
+    B --> C["We acquire nuclear weapons"]
+    B --> D["We build a nuclear shield /<br/>defensive alliance"]
+    C --> E{"Who controls the weapons?"}
+    D --> F{"Who controls the shield?"}
+    E --> G["A centralized state authority"]
+    E --> H["A democratic collective"]
+    F --> I["An allied nation-state"]
+    F --> J["A collective defense pact"]
+    G --> K["You've recreated the<br/>nation-state you sought<br/>to replace"]
+    H --> L{"How do you prevent<br/>the collective from becoming<br/>an authoritarian state?"}
+    I --> M["You're now dependent<br/>on imperial power"]
+    J --> N{"How do you prevent<br/>the pact from becoming<br/>a new empire?"}
+    L --> O["THE PARADOX:<br/>Defending utopian ideals<br/>requires abandoning them"]
+    N --> O
+
+    style A fill:#166534,color:#fff,stroke:none
+    style B fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style C fill:#15803D,color:#fff,stroke:none
+    style D fill:#15803D,color:#fff,stroke:none
+    style O fill:#dc2626,color:#fff,stroke:none
+    </div>
+
+    <div class="card">
+      <h3>The Inescapable Trap</h3>
+      <p>As the Marxist critique established: you cannot build a new society in the cracks of the old one without confronting the old one's monopoly on violence. But seizing the instruments of coercion (armies, police, surveillance) corrupts the thing being defended. The utopians had the honesty to refuse the instruments of coercion; the Marxists had the realism to recognize that refusal meant defeat. <strong>Neither side resolved the contradiction.</strong></p>
+    </div>
+
+    <div class="big-question" style="font-size:24px;">But wait &mdash; is this really the only option?</div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="8" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 9: BEYOND THE BINARY ==================== -->
+<div class="slide" id="slide-9">
+  <div class="slide-header">
+    <div class="section-label">Part III &mdash; The Defense Problem</div>
+    <h1>Beyond the Binary</h1>
+    <h2>If imperialism never achieves global hegemony, there are other options</h2>
+  </div>
+  <div class="slide-body">
+    <div class="card" style="margin-bottom:16px;">
+      <h3>The Key Assumption</h3>
+      <p>The dialogue tree assumes you must either <strong>acquire weapons</strong> or <strong>submit</strong>. But this only holds if imperialism achieves <em>total global hegemony</em>. Historically, it never has. There have always been <strong>zones outside direct imperial control</strong> &mdash; ungoverned spaces, neutral territories, failed states, digital frontiers, international waters.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="highlight-box">
+          <h3 style="font-size:18px;">The Expand / Recede Model</h3>
+          <p style="margin-top:8px;">Instead of standing and fighting (acquiring nuclear arms) or submitting to an imperial patron, a network of autonomous collectives can <strong>expand into uncontested zones</strong> and <strong>recede from zones under imperial pressure</strong>.</p>
+          <ul style="margin-top:12px;">
+            <li>No fixed territory to defend &mdash; the network is <strong>nomadic and digital-first</strong></li>
+            <li>Physical nodes (co-living, co-working) exist as an <strong>archipelago</strong> across jurisdictions</li>
+            <li>When one node is threatened, assets and operations shift to others</li>
+            <li>The network grows by establishing new nodes, not by defending borders</li>
+            <li>Like water, it flows around obstacles rather than breaking through them</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Insurance Against Imperialist Expansion</h3>
+          <p>The network doesn't just run &mdash; it actively <strong>insures itself</strong> against imperial incursion into its zones:</p>
+          <div class="flow-step"><div class="step-num">1</div><div class="step-text"><strong>zkTLS event verification</strong> &mdash; Cryptographically prove that a trusted news source published an article about an invasion, sanctions, or martial law in a specific zone</div></div>
+          <div class="flow-step"><div class="step-num">2</div><div class="step-text"><strong>Parametric smart contract trigger</strong> &mdash; When 3+ verified sources confirm the event, the insurance contract activates</div></div>
+          <div class="flow-step"><div class="step-num">3</div><div class="step-text"><strong>Automatic asset liquidation</strong> &mdash; DeFi protocols convert assets to portable stablecoins, bridge to accessible chains</div></div>
+          <div class="flow-step"><div class="step-num">4</div><div class="step-text"><strong>Relocation fund release</strong> &mdash; Pre-funded multi-sig wallet releases funds for movement to a new zone</div></div>
+          <p style="margin-top:10px; font-size:12px; color:var(--gray-500);">Every component exists in production today: TLSNotary, Reclaim Protocol, Etherisc, Aave/Uniswap, cross-chain bridges.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://tlsnotary.org/" target="_blank">TLSNotary</a> &bull;
+            <a class="ref-link" href="https://blog.reclaimprotocol.org/" target="_blank">Reclaim Protocol</a> &bull;
+            <a class="ref-link" href="https://etherisc.com/" target="_blank">Etherisc</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="9" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 10: CRYPTO STATE SERVICES ==================== -->
+<div class="slide" id="slide-10">
+  <div class="slide-header">
+    <div class="section-label">Part III &mdash; The Defense Problem</div>
+    <h1>Replacing State Services on Crypto Rails</h1>
+    <h2>Pensions, insurance, healthcare &mdash; without the state</h2>
+  </div>
+  <div class="slide-body">
+    <div class="three-col" style="margin-bottom:16px;">
+      <div class="card">
+        <h3>Decentralized Pensions</h3>
+        <ul>
+          <li>DeFi yield vaults + time-locked distributions replace fund managers</li>
+          <li>UN already uses blockchain for global pension identity</li>
+          <li>Smart contracts auto-collect contributions, invest via yield strategies, distribute on schedule</li>
+          <li>No employer, no government, no intermediary required</li>
+          <li>Florida HB 183: up to 10% of $218B retirement fund into digital assets</li>
+        </ul>
+        <div class="refs">
+          <a class="ref-link" href="https://www.coindesk.com/tech/2025/09/26/un-experiment-with-pension-funds-proves-blockchain-as-ultimate-identity-tech" target="_blank">CoinDesk: UN Blockchain Pension</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Decentralized Insurance</h3>
+        <ul>
+          <li><strong>Nexus Mutual:</strong> $6B+ in assets protected, member-governed claims</li>
+          <li><strong>Etherisc:</strong> 22,000 Kenyan farmers insured via parametric crop insurance</li>
+          <li><strong>Key innovation:</strong> Parametric triggers &mdash; when oracle-verified conditions are met (wind speed, rainfall), payouts execute automatically</li>
+          <li>No forms, no adjusters, no government agency</li>
+          <li>$350M+ combined capital across platforms</li>
+        </ul>
+        <div class="refs">
+          <a class="ref-link" href="https://nexusmutual.io/" target="_blank">Nexus Mutual</a> &bull;
+          <a class="ref-link" href="https://etherisc.com/" target="_blank">Etherisc</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Sovereign Health Records</h3>
+        <ul>
+          <li><strong>MedRec (MIT):</strong> Ethereum smart contracts for medical data access control</li>
+          <li>Patients own their health data with cryptographic access control</li>
+          <li>Cross-border portability is native &mdash; works the same in Kenya or Germany</li>
+          <li>Smart contract payment automation eliminates claims processing</li>
+          <li>Market: $9.56B (2024) &rarr; projected $193B by 2034</li>
+        </ul>
+        <div class="refs">
+          <a class="ref-link" href="https://www.media.mit.edu/publications/medrec-blockchain-for-medical-data-access-permission-management-and-trend-analysis/" target="_blank">MIT: MedRec</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>The Composable Stack</h3>
+      <table>
+        <tr><th>State Service</th><th>Crypto Replacement</th><th>Live Projects</th></tr>
+        <tr><td>Pensions / Retirement</td><td>DeFi yield + time-locked vaults + on-chain identity</td><td>ForUsAll, UN blockchain pension</td></tr>
+        <tr><td>Insurance</td><td>Parametric smart contracts + oracle-verified triggers</td><td>Etherisc, Nexus Mutual, Neptune Mutual</td></tr>
+        <tr><td>Healthcare Records</td><td>Patient-sovereign encrypted data + smart contract ACL</td><td>MedRec, PolyMed, EHRChain</td></tr>
+        <tr><td>Event Verification</td><td>zkTLS proofs of web content</td><td>TLSNotary, Reclaim Protocol, zkPass</td></tr>
+        <tr><td>Geopolitical Risk</td><td>Prediction markets + parametric triggers</td><td>Polymarket + Etherisc + DeFi</td></tr>
+        <tr><td>Governance</td><td>Modular federated DAOs</td><td>Hypha DAO, GnosisDAO, SubDAO architecture</td></tr>
+      </table>
+      <div class="refs">
+        <a class="ref-link" href="https://www.shoal.gg/p/zktls-verifiable-data-composability" target="_blank">Shoal: zkTLS Composability</a> &bull;
+        <a class="ref-link" href="https://www.frontiersin.org/journals/blockchain/articles/10.3389/fbloc.2025.1630402/full" target="_blank">Frontiers: Hypha DAO 3.0</a>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="10" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 11: P2P SANCTIONS - CONCEPT ==================== -->
+<div class="slide" id="slide-11">
+  <div class="slide-header">
+    <div class="section-label">Part IV &mdash; P2P Sanctions</div>
+    <h1>p2p2p: Peer to Peer to Peace</h1>
+    <h2>Decentralized economic cooperation between citizens of conflicting nations</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="highlight-box">
+          <h3 style="font-size:18px; margin-bottom:10px;">The Core Thesis</h3>
+          <p>Traditional sanctions are blunt instruments imposed top-down by powerful nations. They harm civilians, lack transparency, shift with political winds, and reinforce imperial power dynamics.</p>
+          <p style="margin-top:10px;"><strong>p2p2p</strong> flips this: citizens of Country A and Country B create <strong>mutual economic interdependence</strong> through a shared token system. Peace becomes profitable. Conflict becomes costly. At the individual level.</p>
+        </div>
+
+        <div class="card">
+          <h3>How It Differs from Traditional Sanctions</h3>
+          <table>
+            <tr><th>Traditional</th><th>p2p2p</th></tr>
+            <tr><td>Top-down (imposed by powerful nations)</td><td>Bottom-up (decided by affected citizens)</td></tr>
+            <tr><td>Opaque conditions</td><td>Transparent smart contracts</td></tr>
+            <tr><td>Politically motivated</td><td>Community-governed</td></tr>
+            <tr><td>Harms civilians disproportionately</td><td>Targets behaviors, not populations</td></tr>
+            <tr><td>Reinforces imperial power</td><td>Empowers local communities</td></tr>
+            <tr><td>Can be circumvented by elites</td><td>Automatic execution via smart contracts</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>The Dual-Token Model</h3>
+          <p>Two tokens &mdash; one for each nation &mdash; backed by respective national currencies:</p>
+          <ul>
+            <li><strong>Verified citizens</strong> mint at <strong>1:1 rate</strong> (deposit $100, get 100 tokens)</li>
+            <li><strong>Global supporters</strong> mint at <strong>premium rate (1:0.8)</strong> &mdash; the 20% premium funds the peace incentive pool</li>
+            <li>Both tokens governed at the <strong>municipal level</strong></li>
+            <li>Both subject to the same redistribution rules</li>
+            <li>Vision: <strong>decades-long gradual integration</strong> of the two tokens as trust builds</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Game Theory: Engineered Negative-Sum Conflict</h3>
+          <p>The system creates a <strong>Lose/Lose outcome for conflict</strong>. If Country A attacks Country B:</p>
+          <ul>
+            <li>Country A token holders lose tokens (redistributed to Country B holders)</li>
+            <li>Country A businesses lose access to Country B markets</li>
+            <li>Country A's token value drops as the network shrinks</li>
+            <li>Individual Country A citizens pay the cost, not just the state</li>
+          </ul>
+          <p style="margin-top:8px;">Peace is the <strong>only Nash equilibrium</strong> &mdash; the only strategy where no participant benefits from deviating.</p>
+        </div>
+
+        <div class="refs">
+          <a class="ref-link" href="https://github.com/communetxyz/p2peace" target="_blank">GitHub: communetxyz/p2peace</a> &bull;
+          <a class="ref-link" href="https://v0-decentralized-peace-coin.vercel.app" target="_blank">Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="11" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 12: P2P SANCTIONS - VERIFICATION ==================== -->
+<div class="slide" id="slide-12">
+  <div class="slide-header">
+    <div class="section-label">Part IV &mdash; P2P Sanctions</div>
+    <h1>Verification & Redistribution</h1>
+    <h2>zkTLS-verified events trigger automatic token redistribution</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Identity Verification (zkTLS)</h3>
+          <div class="flow-step"><div class="step-num">1</div><div class="step-text">User submits government ID to the zkTLS verification system</div></div>
+          <div class="flow-step"><div class="step-num">2</div><div class="step-text">Zero-knowledge proof generated &mdash; proves citizenship <strong>without revealing personal details</strong></div></div>
+          <div class="flow-step"><div class="step-num">3</div><div class="step-text">Verification NFT issued on-chain</div></div>
+          <div class="flow-step"><div class="step-num">4</div><div class="step-text">User added to verified citizen registry, gains 1:1 minting access</div></div>
+          <p style="margin-top:10px; font-size:12px; color:var(--gray-500);">Privacy-preserving by design. The system only proves citizenship status &mdash; name, address, and other details remain private.</p>
+        </div>
+
+        <div class="card">
+          <h3>Event Monitoring &amp; Verification</h3>
+          <div class="flow-step"><div class="step-num">1</div><div class="step-text">Automated monitor scans configured trusted news sources continuously</div></div>
+          <div class="flow-step"><div class="step-num">2</div><div class="step-text">AI scanner matches article content against keywords in active incentives</div></div>
+          <div class="flow-step"><div class="step-num">3</div><div class="step-text">zkTLS verifies article authenticity (TLS certs, timestamps, cross-referencing)</div></div>
+          <div class="flow-step"><div class="step-num">4</div><div class="step-text">Smart contract executes redistribution automatically</div></div>
+          <div class="flow-step"><div class="step-num">5</div><div class="step-text">48-hour dispute window (75% supermajority can reverse)</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Disincentives (Harmful Actions)</h3>
+          <p>Token redistribution triggered by verified harmful events:</p>
+          <ul>
+            <li><span class="tag tag-gray">Territorial aggression</span> Country A tokens &rarr; Country B holders</li>
+            <li><span class="tag tag-gray">Acts of terrorism</span> Country B tokens &rarr; Country A holders</li>
+            <li><span class="tag tag-gray">Human rights violations</span> Proportional redistribution</li>
+            <li><span class="tag tag-gray">Property destruction</span> Graduated response</li>
+            <li><span class="tag tag-gray">Resource restrictions</span> Proportional redistribution</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Positive Incentives (Peace-Building)</h3>
+          <p>Bonus tokens from the premium pool for verified peace actions:</p>
+          <ul>
+            <li><span class="tag tag-green">Demilitarization</span> Checkpoint reduction, troop withdrawal</li>
+            <li><span class="tag tag-green">Joint business</span> Cross-border ventures earn bonus tokens for both parties</li>
+            <li><span class="tag tag-green">Infrastructure cooperation</span> Shared municipal projects</li>
+            <li><span class="tag tag-green">Educational reform</span> Peace curriculum rewards implementing community</li>
+            <li><span class="tag tag-green">5% trade bonus</span> Verified cross-border business transactions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="12" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 13: P2P SANCTIONS - GOVERNANCE ==================== -->
+<div class="slide" id="slide-13">
+  <div class="slide-header">
+    <div class="section-label">Part IV &mdash; P2P Sanctions</div>
+    <h1>Democratic Governance</h1>
+    <h2>Quadratic voting with dual-majority requirements</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Quadratic Voting</h3>
+          <p>Prevents wealth concentration: the cost of additional votes increases quadratically.</p>
+          <table>
+            <tr><th>Tokens Held</th><th>Votes</th><th>Ratio</th></tr>
+            <tr><td>1</td><td>1</td><td>1:1</td></tr>
+            <tr><td>4</td><td>2</td><td>2:1</td></tr>
+            <tr><td>100</td><td>10</td><td>10:1</td></tr>
+            <tr><td>10,000</td><td>100</td><td>100:1</td></tr>
+          </table>
+          <p style="margin-top:8px;">A whale with 10,000 tokens gets only 100 votes &mdash; not 10,000. This equalizes voice across wealth levels.</p>
+        </div>
+
+        <div class="card">
+          <h3>Dual-Majority Requirement</h3>
+          <p>Every proposal must receive:</p>
+          <ul>
+            <li>Majority support from <strong>Country A</strong> token holders</li>
+            <li>Majority support from <strong>Country B</strong> token holders</li>
+            <li>At least <strong>30% total participation</strong></li>
+          </ul>
+          <p style="margin-top:8px;">Neither community can impose rules on the other unilaterally. Consensus is structurally required.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Proposal Lifecycle</h3>
+          <div class="flow-step"><div class="step-num">1</div><div class="step-text"><strong>Submit</strong> &mdash; Any token holder above minimum threshold can propose</div></div>
+          <div class="flow-step"><div class="step-num">2</div><div class="step-text"><strong>Discussion</strong> &mdash; 7-day period for community debate and amendment</div></div>
+          <div class="flow-step"><div class="step-num">3</div><div class="step-text"><strong>Voting</strong> &mdash; 3-day quadratic voting period with dual-majority requirement</div></div>
+          <div class="flow-step"><div class="step-num">4</div><div class="step-text"><strong>Implementation</strong> &mdash; Approved proposals auto-executed via smart contracts</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Checks &amp; Balances</h3>
+          <ul>
+            <li><strong>Multi-signature</strong> requirements for critical changes</li>
+            <li><strong>Time-locked execution</strong> for major decisions</li>
+            <li><strong>Emergency pause</strong> mechanism</li>
+            <li><strong>Independent arbitration</strong> council for disputes</li>
+            <li><strong>Delegation</strong> options for passive participants</li>
+            <li><strong>7-day holding</strong> requirement before voting eligibility</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Anti-Imperialist Safeguard</h3>
+          <p>External nations can offer tokenized incentives (converting opaque sanctions into transparent smart contract conditions) but <strong>cannot control p2p2p governance</strong>. Local token holders maintain full sovereignty. Conditions are transparent and immutable &mdash; no shifting goalposts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="13" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 14: P2P SANCTIONS - VISION ==================== -->
+<div class="slide" id="slide-14">
+  <div class="slide-header">
+    <div class="section-label">Part IV &mdash; P2P Sanctions</div>
+    <h1>The Self-Reinforcing Peace Loop</h1>
+    <h2>Economic incentives over moral appeals</h2>
+  </div>
+  <div class="slide-body">
+    <div class="mermaid">
+graph LR
+    A["Citizens join p2p2p<br/>mint tokens at 1:1"] --> B["Cross-border trade<br/>earns bonus tokens"]
+    B --> C["Economic interdependence<br/>grows"]
+    C --> D["Conflict becomes<br/>costly for individuals"]
+    D --> E["Peace becomes<br/>the rational choice"]
+    E --> F["More citizens join<br/>network grows"]
+    F --> B
+
+    style A fill:#166534,color:#fff,stroke:none
+    style B fill:#15803D,color:#fff,stroke:none
+    style C fill:#16A34A,color:#fff,stroke:none
+    style D fill:#22C55E,color:#fff,stroke:none
+    style E fill:#166534,color:#fff,stroke:none
+    style F fill:#15803D,color:#fff,stroke:none
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Example Scenario</h3>
+          <p>A business owner from Country A deposits $10,000 and receives 10,000 tokens at the 1:1 rate. They:</p>
+          <ul>
+            <li>Gain access to Country B customers (new market)</li>
+            <li>Earn 5% bonus tokens on every cross-border transaction</li>
+            <li>Benefit from token appreciation as the network grows</li>
+            <li>Have a direct, personal economic stake in peace</li>
+          </ul>
+          <p style="margin-top:8px;">This works <strong>regardless of political views</strong>. The economically rational choice is engineered to also be the peace-building choice.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Graduated External Integration</h3>
+          <p>External nations can convert sanctions into tokenized incentives with three transparent levels:</p>
+          <ul>
+            <li><strong>Level 1 &mdash; Basic Relief:</strong> Tariff reductions, eased travel &mdash; triggered by initial security cooperation</li>
+            <li><strong>Level 2 &mdash; Sectoral Integration:</strong> Trade agreements, tech access &mdash; triggered by substantial demilitarization</li>
+            <li><strong>Level 3 &mdash; Full Integration:</strong> Free trade, financial integration &mdash; triggered by comprehensive peace agreement</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Why This Is Different</h3>
+          <p>Traditional peace processes rely on state actors negotiating with each other. p2p2p creates peace infrastructure at the <strong>citizen level</strong> &mdash; regardless of what governments do. It works because it aligns <strong>individual economic self-interest</strong> with collective peace, rather than relying on moral appeals, charity, or state decree.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="14" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+<!-- ==================== SLIDE 15: COLLECTIVIZED CURRENCY ATTACKS ==================== -->
+<div class="slide" id="slide-15">
+  <div class="slide-header">
+    <div class="section-label">Part V &mdash; Economic Pressure</div>
+    <h1>Collectivized Currency Pressure</h1>
+    <h2>From Soros to DAOs: decentralizing economic power against nation-states</h2>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h3>Black Wednesday: How Soros Broke the Pound</h3>
+          <p><strong>September 16, 1992.</strong> George Soros, Stanley Druckenmiller, and Scott Bessent identified that Britain had joined the European Exchange Rate Mechanism at an overvalued rate of 2.95 DM per pound.</p>
+          <ul>
+            <li>Built a <strong>$10 billion short position</strong> against the pound</li>
+            <li>Risk-reward was asymmetric: max downside ~0.5%, potential upside 15-20%</li>
+            <li>Bank of England spent <strong>&pound;27 billion</strong> defending the peg &mdash; failed</li>
+            <li>Raised interest rates from 10% &rarr; 12% &rarr; 15% in a single day &mdash; failed</li>
+            <li>UK withdrew from the ERM at 7:30 PM</li>
+          </ul>
+          <p style="margin-top:8px;"><strong>Result:</strong> Soros profited ~$1.8 billion. The pound fell 15% against the DM and 25% against the dollar. The Conservatives lost credibility and didn't return to power for 18 years.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://en.wikipedia.org/wiki/Black_Wednesday" target="_blank">Wikipedia: Black Wednesday</a> &bull;
+            <a class="ref-link" href="https://priceonomics.com/the-trade-of-the-century-when-george-soros-broke/" target="_blank">Priceonomics: Trade of the Century</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Collectivizing the Mechanism</h3>
+          <p>What if the same economic pressure could be applied in a <strong>decentralized and anonymous</strong> way?</p>
+          <ul>
+            <li><strong>Morris &amp; Shin (1998)</strong> proved that coordinated attacks don't need explicit coordination. When participants have similar private information, a <strong>unique equilibrium</strong> emerges where each independently attacks at the same threshold.</li>
+            <li><strong>GameStop (2021)</strong> proved retail investors coordinating on Reddit can execute institutional-grade strategies without any central leader.</li>
+            <li><strong>Terra/UST (2022)</strong> demonstrated a Soros-style attack on a crypto peg, destroying $45B in one week.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>The Decentralized Version</h3>
+          <div class="flow-step"><div class="step-num">1</div><div class="step-text"><strong>Identify target:</strong> A nation-state with a defensible-but-fragile currency peg (the Obstfeld "ripe for attack" zone)</div></div>
+          <div class="flow-step"><div class="step-num">2</div><div class="step-text"><strong>Public signal:</strong> On-chain reserve data, governance vote, or social media coordination replaces Soros's private conviction</div></div>
+          <div class="flow-step"><div class="step-num">3</div><div class="step-text"><strong>DAO coordination:</strong> Smart contracts pool capital, execute shorts on DEXs, distribute profits automatically</div></div>
+          <div class="flow-step"><div class="step-num">4</div><div class="step-text"><strong>Self-organization:</strong> Per Morris-Shin, participants can independently attack based on the same public signal &mdash; no explicit coordination needed</div></div>
+          <p style="margin-top:10px; font-size:12px;">The key enabler is <strong>on-chain transparency</strong>: publicly visible reserves, order books, and real-time data give every participant the signal that previously required being George Soros.</p>
+          <div class="refs">
+            <a class="ref-link" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=284813" target="_blank">Morris &amp; Shin (1998): Self-Fulfilling Currency Attacks</a> &bull;
+            <a class="ref-link" href="https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/" target="_blank">Harvard Law: Terra Luna Crash</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comment-box"><label>Notes</label><textarea data-slide="15" placeholder="Add your comments for this slide..." oninput="saveComment(this)"></textarea></div>
+</div>
+
+</div><!-- /slide-container -->
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <div class="brand"><img src="https://decentralpark.nyc/images/decentralpark-logo.png" alt="Decentral Park" style="height:28px; vertical-align:middle; margin-right:10px; filter:brightness(10);">DECENTRAL PARK</div>
+  <div class="controls">
+    <button id="prev-btn" onclick="changeSlide(-1)" disabled>&larr; Previous</button>
+    <span class="counter" id="counter">1 / 15</span>
+    <button id="next-btn" onclick="changeSlide(1)">Next &rarr;</button>
+    <button class="copy-all-btn" onclick="copyAllComments()" id="copy-all-btn">Copy All Notes</button>
+  </div>
+</div>
+
+<script>
+  // Initialize Mermaid
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#F0FDF4',
+      primaryTextColor: '#166534',
+      primaryBorderColor: '#BBF7D0',
+      lineColor: '#16A34A',
+      secondaryColor: '#D1FAE5',
+      tertiaryColor: '#DCFCE7',
+      fontFamily: 'Inter, sans-serif'
+    }
+  });
+
+  let currentSlide = 1;
+  const totalSlides = 15;
+
+  function changeSlide(direction) {
+    const oldSlide = document.getElementById('slide-' + currentSlide);
+    currentSlide += direction;
+    if (currentSlide < 1) currentSlide = 1;
+    if (currentSlide > totalSlides) currentSlide = totalSlides;
+
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById('slide-' + currentSlide).classList.add('active');
+    document.getElementById('counter').textContent = currentSlide + ' / ' + totalSlides;
+    document.getElementById('prev-btn').disabled = currentSlide === 1;
+    document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+  }
+
+  // Slide titles for copy-all
+  const slideTitles = {
+    1: "What Kinds of Goods Exist?",
+    2: "What Is Post-Capitalism?",
+    3: "Speculative Post-Capitalism: POCAS",
+    4: "What Is Imperialism?",
+    5: "Post-Imperialist Mechanisms",
+    6: "Bitcoin: A Post-Imperialist Mechanism",
+    7: "Utopian Socialism: A Brief History",
+    8: "The Defense Paradox",
+    9: "Beyond the Binary",
+    10: "Replacing State Services on Crypto Rails",
+    11: "p2p2p: Peer to Peer to Peace",
+    12: "Verification & Redistribution",
+    13: "Democratic Governance",
+    14: "The Self-Reinforcing Peace Loop",
+    15: "Collectivized Currency Pressure"
+  };
+
+  // Save comment to localStorage
+  function saveComment(textarea) {
+    const slideNum = textarea.getAttribute('data-slide');
+    localStorage.setItem('slide-comment-' + slideNum, textarea.value);
+  }
+
+  // Load comments from localStorage on page load
+  function loadComments() {
+    document.querySelectorAll('.comment-box textarea').forEach(function(textarea) {
+      const slideNum = textarea.getAttribute('data-slide');
+      const saved = localStorage.getItem('slide-comment-' + slideNum);
+      if (saved) textarea.value = saved;
+    });
+  }
+
+  // Copy all comments with slide titles
+  function copyAllComments() {
+    let output = '';
+    for (let i = 1; i <= totalSlides; i++) {
+      const comment = localStorage.getItem('slide-comment-' + i) || '';
+      if (comment.trim()) {
+        output += 'Slide ' + i + ' — ' + slideTitles[i] + '\n';
+        output += comment.trim() + '\n\n';
+      }
+    }
+    if (!output) {
+      output = '(No comments added to any slides yet)';
+    }
+    navigator.clipboard.writeText(output.trim()).then(function() {
+      const btn = document.getElementById('copy-all-btn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy All Notes';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  // Prevent space from navigating when typing in textarea
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+  });
+
+  // Load saved comments on startup
+  loadComments();
+</script>
+
+</body>
+</html>
