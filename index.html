@@ -180,7 +180,7 @@
   .interlude h1 { font-size: 52px; font-weight: 800; color: var(--green-800); margin-bottom: 16px; }
   .interlude p { font-size: 18px; color: var(--green-700); max-width: 600px; line-height: 1.6; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
 </head>
 <body>
 
@@ -226,27 +226,33 @@
         <div class="card">
           <h3>The Four Types of Goods</h3>
           <p style="margin-bottom:8px;">Capitalism's M-C-M' circuit works best for one type of good:</p>
-          <div class="mermaid">
-quadrantChart
-    title Types of Economic Goods
-    x-axis "Non-Excludable (Public)" --> "Excludable (Private)"
-    y-axis "Rivalrous" --> "Non-Rivalrous"
-    quadrant-1 "Club Goods"
-    quadrant-2 "Public Goods"
-    quadrant-3 "Common-Pool Resources"
-    quadrant-4 "Private Goods"
-    Netflix: [0.8, 0.75]
-    Toll Roads: [0.7, 0.65]
-    Gyms: [0.85, 0.8]
-    National Defense: [0.2, 0.8]
-    Street Lighting: [0.15, 0.85]
-    Open Source: [0.25, 0.9]
-    Fisheries: [0.2, 0.25]
-    Forests: [0.15, 0.3]
-    Groundwater: [0.25, 0.2]
-    Food: [0.85, 0.2]
-    Cars: [0.8, 0.15]
-    Housing: [0.75, 0.25]
+          <div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto 1fr 1fr auto; gap:0; border:2px solid var(--green-200); border-radius:12px; overflow:hidden; font-size:12px;">
+            <div style="grid-column:1/3; text-align:center; padding:4px; font-size:11px; font-weight:600; color:var(--green-700);">&uarr; Non-Rivalrous</div>
+            <div style="background:#F0FDF4; padding:12px; border-right:2px solid var(--green-200); border-bottom:2px solid var(--green-200);">
+              <div style="font-weight:700; color:var(--green-800); margin-bottom:4px;">Public Goods</div>
+              <div style="color:var(--gray-600); line-height:1.4;">National defense, street lighting, open-source software, clean air, knowledge</div>
+              <div style="color:var(--green-700); font-size:10px; margin-top:4px;">Markets underprovide (free rider problem)</div>
+            </div>
+            <div style="background:#D1FAE5; padding:12px; border-bottom:2px solid var(--green-200);">
+              <div style="font-weight:700; color:var(--green-800); margin-bottom:4px;">Club Goods</div>
+              <div style="color:var(--gray-600); line-height:1.4;">Netflix, toll roads, gyms, cinemas, encrypted WiFi</div>
+              <div style="color:var(--green-700); font-size:10px; margin-top:4px;">Require artificial scarcity (DRM, paywalls)</div>
+            </div>
+            <div style="background:#DCFCE7; padding:12px; border-right:2px solid var(--green-200);">
+              <div style="font-weight:700; color:var(--green-800); margin-bottom:4px;">Common-Pool Resources</div>
+              <div style="color:var(--gray-600); line-height:1.4;">Fisheries, forests, groundwater, the atmosphere</div>
+              <div style="color:var(--green-700); font-size:10px; margin-top:4px;">Tragedy of the Commons (Hardin 1968)</div>
+            </div>
+            <div style="background:#BBF7D0; padding:12px;">
+              <div style="font-weight:700; color:var(--green-800); margin-bottom:4px;">Private Goods &#9733;</div>
+              <div style="color:var(--gray-600); line-height:1.4;">Food, cars, housing, smartphones, oil</div>
+              <div style="color:var(--green-700); font-size:10px; margin-top:4px;"><strong>Capitalism's sweet spot</strong></div>
+            </div>
+            <div style="grid-column:1/3; display:flex; justify-content:space-between; padding:4px 12px; font-size:11px; font-weight:600; color:var(--green-700);">
+              <span>&larr; Non-Excludable (Public)</span>
+              <span>&darr; Rivalrous</span>
+              <span>Excludable (Private) &rarr;</span>
+            </div>
           </div>
         </div>
 
@@ -450,45 +456,36 @@ quadrantChart
         <div class="icon">&#x1F6E1;</div>
         <h4>Stable Under Attack</h4>
         <p>Survives sustained assault from the most powerful nation-states on earth. Cannot be shut down, co-opted, or destroyed.</p>
-        <div style="margin-top:10px;">
-          <div class="mermaid" style="padding:8px; margin:0;">
-graph LR
-    A["Nation-state<br/>attack"] -->|"fails"| B["System<br/>persists"]
-    B -->|"becomes"| C["More<br/>distributed"]
-    style A fill:#dc2626,color:#fff,stroke:none
-    style B fill:#16A34A,color:#fff,stroke:none
-    style C fill:#166534,color:#fff,stroke:none
-          </div>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:6px; justify-content:center;">
+          <span style="background:#dc2626; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">Attack</span>
+          <span style="color:var(--green-600);">&rarr;</span>
+          <span style="background:#16A34A; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">Persists</span>
+          <span style="color:var(--green-600);">&rarr;</span>
+          <span style="background:#166534; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">More distributed</span>
         </div>
       </div>
       <div class="criterion-card">
         <div class="icon">&#x2699;</div>
         <h4>Provides a Service</h4>
         <p>Delivers a meaningful, functional service that persists over time regardless of geopolitical pressure. Not theoretical &mdash; actually works.</p>
-        <div style="margin-top:10px;">
-          <div class="mermaid" style="padding:8px; margin:0;">
-graph LR
-    D["Sanctions<br/>imposed"] -->|"service"| E["Still<br/>available"]
-    E -->|"users"| F["Still<br/>growing"]
-    style D fill:#dc2626,color:#fff,stroke:none
-    style E fill:#16A34A,color:#fff,stroke:none
-    style F fill:#166534,color:#fff,stroke:none
-          </div>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:6px; justify-content:center;">
+          <span style="background:#dc2626; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">Sanctions</span>
+          <span style="color:var(--green-600);">&rarr;</span>
+          <span style="background:#16A34A; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">Still available</span>
+          <span style="color:var(--green-600);">&rarr;</span>
+          <span style="background:#166534; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">Still growing</span>
         </div>
       </div>
       <div class="criterion-card">
         <div class="icon">&#x1F310;</div>
         <h4>No State Reliance</h4>
         <p>Runs autonomously. No government operates it, funds it, or can shut it down. Truly sovereign from the nation-state system.</p>
-        <div style="margin-top:10px;">
-          <div class="mermaid" style="padding:8px; margin:0;">
-graph LR
-    G["No CEO"] --- H["No HQ"]
-    H --- I["No state<br/>operator"]
-    style G fill:#166534,color:#fff,stroke:none
-    style H fill:#15803D,color:#fff,stroke:none
-    style I fill:#16A34A,color:#fff,stroke:none
-          </div>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:6px; justify-content:center;">
+          <span style="background:#166534; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">No CEO</span>
+          <span style="color:var(--green-200);">&bull;</span>
+          <span style="background:#15803D; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">No HQ</span>
+          <span style="color:var(--green-200);">&bull;</span>
+          <span style="background:#16A34A; color:#fff; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:600;">No state operator</span>
         </div>
       </div>
     </div>
@@ -649,29 +646,37 @@ graph LR
   </div>
   <div class="slide-body">
     <div class="mermaid">
-flowchart TD
-    A["Someone presents a new political ideology"]:::green --> B{"How does your ideology defend itself\nfrom violence or nuclear weapons?"}:::white
-    B --> C["We acquire nuclear weapons"]:::mid
-    B --> D["We build a nuclear shield /\ndefensive alliance"]:::mid
-    C --> E{"Who controls the weapons?"}:::white
-    D --> F{"Who controls the shield?"}:::white
-    E --> G["A centralized\nstate authority"]:::light
-    E --> H["A democratic\ncollective"]:::light
-    F --> I["An allied\nnation-state"]:::light
-    F --> J["A collective\ndefense pact"]:::light
-    G --> K["You've recreated the\nnation-state you sought\nto replace"]:::warn
-    H --> L{"How do you prevent\nthe collective from becoming\nan authoritarian state?"}:::white
-    I --> M["You're now dependent\non imperial power"]:::warn
-    J --> N{"How do you prevent\nthe pact from becoming\na new empire?"}:::white
-    L --> O["THE PARADOX:\nDefending utopian ideals\nrequires abandoning them"]:::red
+graph TD
+    A["Someone presents a new political ideology"] --> B{"How does your ideology defend itself from violence or nuclear weapons?"}
+    B --> C["We acquire nuclear weapons"]
+    B --> D["We build a nuclear shield / defensive alliance"]
+    C --> E{"Who controls the weapons?"}
+    D --> F{"Who controls the shield?"}
+    E --> G["A centralized state authority"]
+    E --> H["A democratic collective"]
+    F --> I["An allied nation-state"]
+    F --> J["A collective defense pact"]
+    G --> K["You've recreated the nation-state you sought to replace"]
+    H --> L{"How do you prevent the collective from becoming an authoritarian state?"}
+    I --> M["You're now dependent on imperial power"]
+    J --> N{"How do you prevent the pact from becoming a new empire?"}
+    L --> O["THE PARADOX: Defending utopian ideals requires abandoning them"]
     N --> O
-
-    classDef green fill:#166534,color:#fff,stroke:none
-    classDef white fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
-    classDef mid fill:#15803D,color:#fff,stroke:none
-    classDef light fill:#D1FAE5,color:#166534,stroke:#BBF7D0,stroke-width:1px
-    classDef warn fill:#F59E0B,color:#fff,stroke:none
-    classDef red fill:#dc2626,color:#fff,stroke:none
+    style A fill:#166534,color:#fff,stroke:none
+    style B fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style C fill:#15803D,color:#fff,stroke:none
+    style D fill:#15803D,color:#fff,stroke:none
+    style E fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style F fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style G fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style H fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style I fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style J fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style K fill:#F59E0B,color:#fff,stroke:none
+    style L fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style M fill:#F59E0B,color:#fff,stroke:none
+    style N fill:#fff,color:#166534,stroke:#BBF7D0,stroke-width:2px
+    style O fill:#dc2626,color:#fff,stroke:none
     </div>
 
     <div class="card">
@@ -899,15 +904,16 @@ flowchart TD
     <div class="two-col" style="align-items:start;">
       <div>
         <div class="mermaid">
-flowchart TD
-    A["Citizen connects\ngovernment ID"]:::green --> B["zkTLS generates\nzero-knowledge proof"]:::mid
-    B --> C["Proves citizenship\nWITHOUT revealing\nname, address, etc."]:::light
-    C --> D["Verification NFT\nissued on-chain"]:::green
-    D --> E["Access to 1:1 minting\n+ governance voting"]:::mid
-
-    classDef green fill:#166534,color:#fff,stroke:none
-    classDef mid fill:#15803D,color:#fff,stroke:none
-    classDef light fill:#D1FAE5,color:#166534,stroke:#BBF7D0,stroke-width:1px
+graph TD
+    A["Citizen connects government ID"] --> B["zkTLS generates zero-knowledge proof"]
+    B --> C["Proves citizenship WITHOUT revealing name, address, etc."]
+    C --> D["Verification NFT issued on-chain"]
+    D --> E["Access to 1:1 minting + governance voting"]
+    style A fill:#166534,color:#fff,stroke:none
+    style B fill:#15803D,color:#fff,stroke:none
+    style C fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style D fill:#166534,color:#fff,stroke:none
+    style E fill:#15803D,color:#fff,stroke:none
         </div>
 
         <div class="card">
@@ -919,15 +925,16 @@ flowchart TD
 
       <div>
         <div class="mermaid">
-flowchart TD
-    F["Trusted news sources\npublish event"]:::light --> G["AI scanner matches\nagainst active\nincentive keywords"]:::mid
-    G --> H["zkTLS verifies\narticle authenticity\n(TLS certs + timestamps)"]:::green
-    H --> I["Smart contract\nexecutes redistribution"]:::mid
-    I --> J["48-hour dispute window\n75% supermajority\ncan reverse"]:::light
-
-    classDef green fill:#166534,color:#fff,stroke:none
-    classDef mid fill:#15803D,color:#fff,stroke:none
-    classDef light fill:#D1FAE5,color:#166534,stroke:#BBF7D0,stroke-width:1px
+graph TD
+    F["Trusted news sources publish event"] --> G["AI scanner matches against active incentive keywords"]
+    G --> H["zkTLS verifies article authenticity"]
+    H --> I["Smart contract executes redistribution"]
+    I --> J["48-hour dispute window - 75% supermajority can reverse"]
+    style F fill:#D1FAE5,color:#166534,stroke:#BBF7D0
+    style G fill:#15803D,color:#fff,stroke:none
+    style H fill:#166534,color:#fff,stroke:none
+    style I fill:#15803D,color:#fff,stroke:none
+    style J fill:#D1FAE5,color:#166534,stroke:#BBF7D0
         </div>
 
         <div class="card">
@@ -956,20 +963,19 @@ flowchart TD
   </div>
   <div class="slide-body">
     <div class="mermaid">
-flowchart LR
-    A["Citizens join\nmint tokens at 1:1"]:::a --> B["Cross-border trade\nearns bonus tokens"]:::b
-    B --> C["Economic\ninterdependence grows"]:::c
-    C --> D["Conflict becomes\ncostly for individuals"]:::d
-    D --> E["Peace becomes\nthe rational choice"]:::e
-    E --> F["More citizens join\nnetwork grows"]:::f
+graph LR
+    A["Citizens join, mint tokens at 1:1"] --> B["Cross-border trade earns bonus tokens"]
+    B --> C["Economic interdependence grows"]
+    C --> D["Conflict becomes costly for individuals"]
+    D --> E["Peace becomes the rational choice"]
+    E --> F["More citizens join, network grows"]
     F --> B
-
-    classDef a fill:#166534,color:#fff,stroke:none
-    classDef b fill:#15803D,color:#fff,stroke:none
-    classDef c fill:#16A34A,color:#fff,stroke:none
-    classDef d fill:#22C55E,color:#1F2937,stroke:none
-    classDef e fill:#166534,color:#fff,stroke:none
-    classDef f fill:#15803D,color:#fff,stroke:none
+    style A fill:#166534,color:#fff,stroke:none
+    style B fill:#15803D,color:#fff,stroke:none
+    style C fill:#16A34A,color:#fff,stroke:none
+    style D fill:#22C55E,color:#1F2937,stroke:none
+    style E fill:#166534,color:#fff,stroke:none
+    style F fill:#15803D,color:#fff,stroke:none
     </div>
 
     <div class="two-col">
